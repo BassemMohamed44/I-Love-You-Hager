@@ -148,6 +148,31 @@ button {
         transform: scale(1); 
     }
 }
+
+@media only screen and (max-width: 480px) {
+    .envelope {
+        width: 90vw;   
+        height: auto;  
+        aspect-ratio: 4/3; 
+    }
+
+    .letter {
+        font-size: 18px;
+        width: 90%;
+        height: 70%;
+        padding: 15px;
+    }
+
+    button {
+        padding: 12px 30px;
+        font-size: 16px;
+        border-radius: 25px;
+    }
+
+    .heart {
+        font-size: 15px !important;
+    }
+}
 </style>
 
 </head>
@@ -253,3 +278,4 @@ function createHeart() {
 
 </body>
 </html>
+
