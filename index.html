@@ -1,281 +1,288 @@
 <!DOCTYPE html>
 <html lang="ar">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>❤️Hager</title>
+        <title>❤️المدام بتاعتي</title>
 
-<!-- WEBSITE DESCRIPTION -->
-<meta name="description" content=" I LOVE YOU❤️ ">
+        <!-- WEBSITE DESCRIPTION -->
+        <meta name="description" content=" I LOVE YOU❤️ ">
 
-<!-- lIBRARY OF ICONS AND FONTS -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+        <!-- lIBRARY OF ICONS AND FONTS -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 
-<!-- OPEN GRAPH META TAGS FOR SOCIAL MEDIA SHARING -->
-<meta property="og:title" content=" ❤️Hager " />
-<meta property="og:description" content=" I LOVE YOU❤️ " />
-<meta property="og:type" content="website" />
-<meta property="og:image" content="Heart Emoji.png" />
-<meta property="og:url" content="  "/>
+        <!-- OPEN GRAPH META TAGS FOR SOCIAL MEDIA SHARING -->
+        <meta property="og:title" content=" ❤️المدام بتاعتي " />
+        <meta property="og:description" content=" I LOVE YOU❤️ " />
+        <meta property="og:type" content="website" />
+        <meta property="og:image" content="Heart Emoji.png" />
+        <meta property="og:url" content=" https://i-love-you-hager.pages.dev/ "/>
 
-<!-- WEBSITE ICON -->
-<link rel="icon" type="image/x-icon" href="Heart Emoji.png">
+        <!-- WEBSITE ICON -->
+        <link rel="icon" type="image/x-icon" href="Heart Emoji.png">
 
-<!-- CSS -->
-<style>
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+        <!-- CSS -->
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
 
-body {
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: linear-gradient(135deg, #ffd1dc, #ffe4ec);
-    font-family: Arial, sans-serif;
-}
+            body {
+                height: 100vh;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                background: linear-gradient(135deg, #ffd1dc, #ffe4ec);
+                font-family: Arial, sans-serif;
+            }
 
-.container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 40px;
-    perspective: 1000px; 
-}
+            .container {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 40px;
+                perspective: 1000px; 
+            }
 
-.envelope {
-    position: relative;
-    width: 420px;
-    height: 320px;
-    background: #ffb6c1;
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0 15px 25px rgba(0,0,0,0.2);
-    transition: transform 0.6s ease;
-    transform-style: preserve-3d;
-}
+            .envelope {
+                position: relative;
+                width: 420px;
+                height: 320px;
+                background: #ffb6c1;
+                border-radius: 10px;
+                overflow: hidden;
+                box-shadow: 0 15px 25px rgba(0,0,0,0.2);
+                transition: transform 0.6s ease;
+                transform-style: preserve-3d;
+            }
 
-.flap {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background: #ff9bb0;
-    clip-path: polygon(0 0, 100% 0, 50% 60%);
-    transform-origin: top;
-    transition: transform 1s;
-    z-index: 3;
-    box-shadow: 0 5px 10px rgba(0,0,0,0.2);
-}
+            .flap {
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                background: #ff9bb0;
+                clip-path: polygon(0 0, 100% 0, 50% 60%);
+                transform-origin: top;
+                transition: transform 1s;
+                z-index: 3;
+                box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+            }
 
-.letter {
-    position: absolute;
-    width: 85%;
-    height: 85%;
-    background: white;
-    left: 7.5%;
-    bottom: -100%;
-    border-radius: 6px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 26px;
-    font-weight: bold;
-    transition: bottom 1s ease, opacity 1s ease;
-    opacity: 0;
-    padding: 20px;
-    text-align: center;
-    line-height: 1.4;
-}
+            .letter {
+                position: absolute;
+                width: 85%;
+                height: 85%;
+                background: white;
+                left: 7.5%;
+                bottom: -100%;
+                border-radius: 6px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                font-size: 26px;
+                font-weight: bold;
+                transition: bottom 1s ease, opacity 1s ease;
+                opacity: 0;
+                padding: 20px;
+                text-align: center;
+                line-height: 1.4;
+            }
 
-.open .flap {
-    transform: rotateX(180deg);
-}
+            .open .flap {
+                transform: rotateX(180deg);
+            }
 
-.open .letter {
-    bottom: 20px;
-    opacity: 1;
-}
+            .open .letter {
+                bottom: 20px;
+                opacity: 1;
+            }
 
-button {
-    padding: 15px 40px;
-    font-size: 18px;
-    border: none;
-    background: #ff4d6d;
-    color: white;
-    border-radius: 30px;
-    cursor: pointer;
-    transition: transform 0.2s, background 0.3s, box-shadow 0.3s;
-    outline: none; 
-    box-shadow: 0 5px 15px rgba(255,0,80,0.3); 
-    animation: pulse 1.5s infinite;
-}
+            button {
+                padding: 15px 40px;
+                font-size: 18px;
+                border: none;
+                background: #ff4d6d;
+                color: white;
+                border-radius: 30px;
+                cursor: pointer;
+                transition: transform 0.2s, background 0.3s, box-shadow 0.3s;
+                outline: none; 
+                box-shadow: 0 5px 15px rgba(255,0,80,0.3); 
+                animation: pulse 1.5s infinite;
+            }
 
-.heart {
-    position: fixed;
-    bottom: -20px;
-    color: red;
-    animation: float 4s linear forwards;
-    pointer-events: none;
-}
+            .heart {
+                position: fixed;
+                bottom: -20px;
+                color: red;
+                animation: float 4s linear forwards;
+                pointer-events: none;
+            }
+            .step{
+                font-size: 24px;
+                font-weight: bold;
+                color: #ff4d6d;
+            }
+            @keyframes float {
+                0% { 
+                    transform: translateY(0) scale(1); opacity: 1; 
+                }
+                50% { 
+                    transform: translateY(-400px) scale(1.2); opacity: 0.8; 
+                }
+                100% { 
+                    transform: translateY(-800px) scale(1); opacity: 0; 
+                }
+            }
 
-@keyframes float {
-    0% { 
-        transform: translateY(0) scale(1); opacity: 1; 
-    }
-    50% { 
-        transform: translateY(-400px) scale(1.2); opacity: 0.8; 
-    }
-    100% { 
-        transform: translateY(-800px) scale(1); opacity: 0; 
-    }
-}
+            @keyframes pulse {
+                0% { 
+                    transform: scale(1); 
+                }
+                50% { 
+                    transform: scale(1.05); 
+                }
+                100% { 
+                    transform: scale(1); 
+                }
+            }
 
-@keyframes pulse {
-    0% { 
-        transform: scale(1); 
-    }
-    50% { 
-        transform: scale(1.05); 
-    }
-    100% { 
-        transform: scale(1); 
-    }
-}
 
-@media only screen and (max-width: 480px) {
-    .envelope {
-        width: 90vw;   
-        height: auto;  
-        aspect-ratio: 4/3; 
-    }
+            @media only screen and (max-width: 480px) {
+                .envelope {
+                    width: 90vw;   
+                    height: auto;  
+                    aspect-ratio: 4/3; 
+                }
 
-    .letter {
-        font-size: 18px;
-        width: 90%;
-        height: 70%;
-        padding: 15px;
-    }
+                .letter {
+                    font-size: 18px;
+                    width: 90%;
+                    height: 70%;
+                    padding: 15px;
+                }
 
-    button {
-        padding: 12px 30px;
-        font-size: 16px;
-        border-radius: 25px;
-    }
+                button {
+                    padding: 12px 30px;
+                    font-size: 16px;
+                    border-radius: 25px;
+                }
 
-    .heart {
-        font-size: 15px !important;
-    }
-}
-</style>
+                .heart {
+                    font-size: 15px !important; 
+                }
+            }
+        </style>
 
-</head>
+    </head>
 
 <body>
 
-<div class="container">
+    <div class="container">
 
-<div class="envelope" id="envelope">
+        <div class="envelope" id="envelope">
 
-<div class="flap"></div>
+        <div class="flap"></div>
 
-<div class="letter">
-<p id="message"></p>
-</div>
+        <div class="letter">
+        <p id="message"></p>
+        </div>
 
 
-</div>
+        </div>
+        <p class="step">STEP 1</p>
+        <button id="openBtn">CLICK HERE</button>
+        <p class="step">STEP 2</p>
+<button onclick="window.location.href='Gift Animation/next.html'">
+    Next
+</button>
+    </div>
 
-<button id="openBtn">CLICK HER</button>
+    <audio id="loveSound">
+        <source src="play.mp3" type="audio/mpeg">
+    </audio>
 
-</div>
+    <!-- JS -->
+    <script>
+        const button = document.getElementById("openBtn")
+        const envelope = document.getElementById("envelope")
+        const message = document.getElementById("message")
+        const sound = document.getElementById("loveSound")
+        const text = "I Love You المدام بتاعتي❤️"
+        let opened = false
+        let messageTyped = false
+        let heartsInterval = null
+        sound.volume = 0.1
 
-<audio id="loveSound">
-  <source src="play.mp3" type="audio/mpeg">
-</audio>
+        button.addEventListener("click", () => {
+            if (!opened) {
 
-<!-- JS -->
-<script>
-const button = document.getElementById("openBtn")
-const envelope = document.getElementById("envelope")
-const message = document.getElementById("message")
-const sound = document.getElementById("loveSound")
-const text = "عايزك تفتكري دايما اني جنبك و معاكي وهفضل سندك و مش هبعد ابدا عنك بل العكس انا حبيتك اكتر ومبسوط بكل لحظة بيني وبينك المدة صغيرة بس بالنسبالي كبيرة اوي ...  I Love You Hager❤️"
-let opened = false
-let messageTyped = false
-let heartsInterval = null
-sound.volume = 0.1
+                envelope.classList.add("open")
+                button.textContent = "CLOSE"
 
-button.addEventListener("click", () => {
-    if (!opened) {
+                sound.currentTime = 0
+                sound.play().catch(err => console.log("Audio failed:", err))
 
-        envelope.classList.add("open")
-        button.textContent = "CLOSE"
+                if (!messageTyped) {
+                    typeTextColored()
+                    messageTyped = true
+                }
 
-        sound.currentTime = 0
-        sound.play().catch(err => console.log("Audio failed:", err))
+                startHearts()
 
-        if (!messageTyped) {
-            typeTextColored()
-            messageTyped = true
+                opened = true
+            } else {
+
+                envelope.classList.remove("open")
+                button.textContent = "CLICK HER"
+
+                sound.pause()
+                sound.currentTime = 0
+
+                stopHearts()
+
+                opened = false
+            }
+        })
+
+        function typeTextColored() {
+            let i = 0
+            const colors = ["#ff4d6d","#ff7f99","#ff9bb0","#ffb6c1","#ce6891","#ff749d"]
+            const typing = setInterval(()=>{
+                const span = document.createElement("span")
+                span.textContent = text[i]
+                span.style.color = colors[i % colors.length]
+                span.style.transition = "color 0.3s ease"
+                message.appendChild(span)
+                i++
+                if(i>=text.length) clearInterval(typing)
+            },100)
         }
 
-        startHearts()
+        function startHearts() {
+            heartsInterval = setInterval(createHeart, 300) 
+        }
 
-        opened = true
-    } else {
+        function stopHearts() {
+            clearInterval(heartsInterval)
+        }
 
-        envelope.classList.remove("open")
-        button.textContent = "CLICK HER"
-
-        sound.pause()
-        sound.currentTime = 0
-
-        stopHearts()
-
-        opened = false
-    }
-})
-
-function typeTextColored() {
-    let i = 0
-    const colors = ["#ff4d6d","#ff7f99","#ff9bb0","#ffb6c1","#ce6891","#ff749d"]
-    const typing = setInterval(()=>{
-        const span = document.createElement("span")
-        span.textContent = text[i]
-        span.style.color = colors[i % colors.length]
-        span.style.transition = "color 0.3s ease"
-        message.appendChild(span)
-        i++
-        if(i>=text.length) clearInterval(typing)
-    },100)
-}
-
-function startHearts() {
-    heartsInterval = setInterval(createHeart, 300) // كل 0.3 ثانية قلب جديد
-}
-
-function stopHearts() {
-    clearInterval(heartsInterval)
-}
-
-function createHeart() {
-    const heart = document.createElement("div")
-    heart.className = "heart"
-    heart.innerHTML = "❤️"
-    heart.style.left = Math.random() * 90 + "vw"
-    heart.style.fontSize = (Math.random() * 20 + 10) + "px"
-    document.body.appendChild(heart)
-    setTimeout(() => heart.remove(), 4000) // إزالة القلب بعد انتهاء الحركة
-}
-</script>
+        function createHeart() {
+            const heart = document.createElement("div")
+            heart.className = "heart"
+            heart.innerHTML = "❤️"
+            heart.style.left = Math.random() * 90 + "vw"
+            heart.style.fontSize = (Math.random() * 20 + 10) + "px"
+            document.body.appendChild(heart)
+            setTimeout(() => heart.remove(), 4000)
+        }
+    </script>
 
 </body>
 </html>
-
