@@ -4,28 +4,23 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        <title>❤️المدام بتاعتي</title>
+        <title>I Love U MYANGEL💖</title>
 
-        <!-- WEBSITE DESCRIPTION -->
-        <meta name="description" content=" I LOVE YOU❤️ ">
+        <meta name="description" content=" I LOVE U MYANGEL ">
 
-        <!-- lIBRARY OF ICONS AND FONTS -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 
-        <!-- OPEN GRAPH META TAGS FOR SOCIAL MEDIA SHARING -->
-        <meta property="og:title" content=" ❤️المدام بتاعتي " />
-        <meta property="og:description" content=" I LOVE YOU❤️ " />
+        <meta property="og:title" content=" I Love U MYANGEL💖 " />
+        <meta property="og:description" content="I Love U MYANGEL💖 " />
         <meta property="og:type" content="website" />
         <meta property="og:image" content="Heart Emoji.png" />
         <meta property="og:url" content=" https://i-love-you-hager.pages.dev/ "/>
 
-        <!-- WEBSITE ICON -->
         <link rel="icon" type="image/x-icon" href="Heart Emoji.png">
 
-        <!-- CSS -->
         <style>
             * {
                 margin: 0;
@@ -34,13 +29,56 @@
             }
 
             body {
-                height: 100vh;
+                min-height: 100vh;
                 display: flex;
+                flex-direction: column; 
                 justify-content: center;
                 align-items: center;
                 background: linear-gradient(135deg, #ffd1dc, #ffe4ec);
-                font-family: Arial, sans-serif;
+                font-family: 'Inter', Arial, sans-serif; 
+                position: relative;
+                overflow-x: hidden;
             }
+
+            /* --- STYLES FOR THE NEW HEADER --- */
+            .site-header {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                padding: 20px 40px;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                z-index: 10;
+            }
+
+            .header-logo {
+                font-size: 22px;
+                font-weight: 700;
+                color: #ff4d6d;
+                text-decoration: none;
+                display: flex;
+                align-items: center;
+                gap: 8px;
+            }
+
+            .header-socials {
+                display: flex;
+                gap: 20px;
+            }
+
+            .header-socials a {
+                color: #ff4d6d;
+                font-size: 20px;
+                transition: transform 0.3s, color 0.3s;
+            }
+
+            .header-socials a:hover {
+                color: #ff749d;
+                transform: scale(1.2);
+            }
+            /* --------------------------------- */
 
             .container {
                 display: flex;
@@ -48,6 +86,7 @@
                 align-items: center;
                 gap: 40px;
                 perspective: 1000px; 
+                margin-top: 60px;
             }
 
             .envelope {
@@ -85,13 +124,14 @@
                 display: flex;
                 justify-content: center;
                 align-items: center;
-                font-size: 26px;
+                font-size: 22px; 
                 font-weight: bold;
                 transition: bottom 1s ease, opacity 1s ease;
                 opacity: 0;
                 padding: 20px;
                 text-align: center;
-                line-height: 1.4;
+                line-height: 1.5;
+                direction: rtl; 
             }
 
             .open .flap {
@@ -124,11 +164,7 @@
                 animation: float 4s linear forwards;
                 pointer-events: none;
             }
-            .step{
-                font-size: 24px;
-                font-weight: bold;
-                color: #ff4d6d;
-            }
+
             @keyframes float {
                 0% { 
                     transform: translateY(0) scale(1); opacity: 1; 
@@ -153,8 +189,15 @@
                 }
             }
 
-
             @media only screen and (max-width: 480px) {
+                .site-header {
+                    padding: 15px 20px;
+                }
+                
+                .header-logo {
+                    font-size: 18px;
+                }
+
                 .envelope {
                     width: 90vw;   
                     height: auto;  
@@ -162,9 +205,9 @@
                 }
 
                 .letter {
-                    font-size: 18px;
+                    font-size: 16px;
                     width: 90%;
-                    height: 70%;
+                    height: 85%;
                     padding: 15px;
                 }
 
@@ -184,17 +227,22 @@
 
 <body>
 
-    <div class="container">
-
-        <div class="envelope" id="envelope">
-
-        <div class="flap"></div>
-
-        <div class="letter">
-        <p id="message"></p>
+    <header class="site-header">
+        <a class="header-logo">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314"/></svg>ヘイガー
+        </a>
+        <div class="header-socials">
+            <!-- <a href="" title="Our Moments"><i class="fa-solid fa-star"></i></a> -->
+            <a href="https://github.com/BassemMohamed44/Velix-App/releases/download/v2.1.2/MYANGEL.exe" title="Love"><i class="fa-solid fa-infinity"></i></a>
         </div>
+    </header>
 
-
+    <div class="container">
+        <div class="envelope" id="envelope">
+            <div class="flap"></div>
+            <div class="letter">
+                <p id="message"></p>
+            </div>
         </div>
         <button id="openBtn">CLICK HERE</button>
     </div>
@@ -203,13 +251,12 @@
         <source src="play.mp3" type="audio/mpeg">
     </audio>
 
-    <!-- JS -->
     <script>
         const button = document.getElementById("openBtn")
         const envelope = document.getElementById("envelope")
         const message = document.getElementById("message")
         const sound = document.getElementById("loveSound")
-        const text = "عايزك تفتكري دايما اني جنبك و معاكي وهفضل سندك و مش هبعد ابدا عنك بل العكس انا حبيتك اكتر ومبسوط بكل لحظة بيني وبينك المدة صغيرة بس بالنسبالي كبيرة اوي ...  I Love You Hager❤️"
+        const text = "عايزك تفتكري دايما اني جنبك و معاكي وهفضل سندك و مش هبعد ابدا عنك بل العكس انا حبيتك اكتر ومبسوط بكل لحظة بيني وبينك المدة صغيرة بس بالنسبالي كبيرة اوي ...  I Love You Hager💖"
         let opened = false
         let messageTyped = false
         let heartsInterval = null
@@ -217,7 +264,6 @@
 
         button.addEventListener("click", () => {
             if (!opened) {
-
                 envelope.classList.add("open")
                 button.textContent = "CLOSE"
 
@@ -230,18 +276,15 @@
                 }
 
                 startHearts()
-
                 opened = true
             } else {
-
                 envelope.classList.remove("open")
-                button.textContent = "CLICK HER"
+                button.textContent = "CLICK HERE" 
 
                 sound.pause()
                 sound.currentTime = 0
 
                 stopHearts()
-
                 opened = false
             }
         })
@@ -271,7 +314,7 @@
         function createHeart() {
             const heart = document.createElement("div")
             heart.className = "heart"
-            heart.innerHTML = "❤️"
+            heart.innerHTML = "💖"
             heart.style.left = Math.random() * 90 + "vw"
             heart.style.fontSize = (Math.random() * 20 + 10) + "px"
             document.body.appendChild(heart)
