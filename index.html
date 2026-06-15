@@ -40,7 +40,211 @@
                 overflow-x: hidden;
             }
 
-            /* --- STYLES FOR THE NEW HEADER --- */
+            /* ========== PASSWORD SCREEN ========== */
+            #password-screen {
+                position: fixed;
+                inset: 0;
+                z-index: 9999;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                background: linear-gradient(135deg, #ffd1dc, #ffe4ec);
+            }
+
+            .lock-card {
+                background: rgba(255,255,255,0.6);
+                backdrop-filter: blur(16px);
+                -webkit-backdrop-filter: blur(16px);
+                border: 1.5px solid rgba(255,77,109,0.2);
+                border-radius: 24px;
+                padding: 48px 40px 40px;
+                width: min(380px, 90vw);
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 22px;
+                box-shadow: 0 20px 60px rgba(255,77,109,0.15);
+                animation: cardIn 0.6s cubic-bezier(.34,1.56,.64,1) both;
+            }
+
+            @keyframes cardIn {
+                from { transform: scale(0.85) translateY(20px); opacity: 0; }
+                to   { transform: scale(1) translateY(0);       opacity: 1; }
+            }
+
+            .lock-icon {
+                font-size: 52px;
+                animation: heartbeat 1.4s ease-in-out infinite;
+            }
+
+            @keyframes heartbeat {
+                0%,100% { transform: scale(1); }
+                14%     { transform: scale(1.15); }
+                28%     { transform: scale(1); }
+                42%     { transform: scale(1.1); }
+                56%     { transform: scale(1); }
+            }
+
+            .lock-title {
+                font-size: 22px;
+                font-weight: 700;
+                color: #ff4d6d;
+                text-align: center;
+                line-height: 1.4;
+            }
+
+            .lock-hint {
+                font-size: 20px;
+                color: #c06080;
+                text-align: center;
+                line-height: 1.6;
+		font-weight:700;
+                direction: rtl;
+            }
+
+            .pw-fields {
+                display: flex;
+                flex-direction: column;
+                gap: 14px;
+                width: 100%;
+            }
+
+            .pw-field-label {
+                font-size: 12px;
+                color: #c06080;
+                font-weight: 600;
+                text-align: right;
+                direction: rtl;
+                margin-bottom: 4px;
+            }
+
+            .pw-wrapper {
+                position: relative;
+                width: 100%;
+            }
+
+            .pw-input {
+                width: 100%;
+                padding: 13px 50px 13px 18px;
+                border: 2px solid #ffb6c1;
+                border-radius: 14px;
+                font-size: 17px;
+                letter-spacing: 3px;
+                text-align: center;
+                background: rgba(255,255,255,0.8);
+                color: #ff4d6d;
+                outline: none;
+                transition: border-color 0.3s, box-shadow 0.3s;
+                font-family: 'Inter', sans-serif;
+            }
+
+            .pw-input::placeholder {
+                letter-spacing: 1px;
+                font-size: 13px;
+                color: #ffb6c1;
+            }
+
+            .pw-input:focus {
+                border-color: #ff4d6d;
+                box-shadow: 0 0 0 4px rgba(255,77,109,0.12);
+            }
+
+            .pw-input.shake {
+                animation: shake 0.4s ease;
+                border-color: #ff4d6d !important;
+            }
+
+            @keyframes shake {
+                0%,100% { transform: translateX(0); }
+                20%     { transform: translateX(-8px); }
+                40%     { transform: translateX(8px); }
+                60%     { transform: translateX(-6px); }
+                80%     { transform: translateX(6px); }
+            }
+
+            .toggle-pw {
+                position: absolute;
+                right: 14px;
+                top: 50%;
+                transform: translateY(-50%);
+                background: none;
+                border: none;
+                cursor: pointer;
+                color: #ff9bb0;
+                font-size: 16px;
+                padding: 4px;
+                animation: none !important;
+                box-shadow: none !important;
+            }
+
+            #pw-error {
+                font-size: 13px;
+                color: #ff4d6d;
+                text-align: center;
+                min-height: 18px;
+                font-weight: 600;
+                direction: rtl;
+                opacity: 0;
+                transition: opacity 0.3s;
+            }
+
+            #pw-error.show { opacity: 1; }
+
+            #pw-submit {
+                width: 100%;
+                padding: 14px;
+                font-size: 17px;
+                border: none;
+                background: linear-gradient(135deg, #ff4d6d, #ff7f99);
+                color: white;
+                border-radius: 14px;
+                cursor: pointer;
+                font-weight: 600;
+                transition: transform 0.2s, box-shadow 0.2s;
+                box-shadow: 0 6px 20px rgba(255,77,109,0.35);
+                animation: pulse 1.5s infinite;
+            }
+
+            #pw-submit:hover {
+                transform: scale(1.03);
+                box-shadow: 0 8px 25px rgba(255,77,109,0.45);
+            }
+
+            /* floating mini hearts behind card */
+            .bg-heart {
+                position: fixed;
+                pointer-events: none;
+                animation: floatBg linear infinite;
+                opacity: 0.25;
+                font-size: 22px;
+            }
+
+            @keyframes floatBg {
+                0%   { transform: translateY(110vh) rotate(0deg);   opacity: 0.25; }
+                100% { transform: translateY(-10vh)  rotate(360deg); opacity: 0; }
+            }
+
+            /* ======= FADE-OUT TRANSITION ======= */
+            #password-screen.fade-out {
+                animation: fadeOut 0.7s ease forwards;
+            }
+
+            @keyframes fadeOut {
+                to { opacity: 0; pointer-events: none; }
+            }
+
+            /* ========== MAIN CONTENT ========== */
+            #main-content {
+                display: none;
+                flex-direction: column;
+                align-items: center;
+                width: 100%;
+            }
+
+            #main-content.visible {
+                display: flex;
+            }
+
             .site-header {
                 position: absolute;
                 top: 0;
@@ -78,7 +282,6 @@
                 color: #ff749d;
                 transform: scale(1.2);
             }
-            /* --------------------------------- */
 
             .container {
                 display: flex;
@@ -166,85 +369,93 @@
             }
 
             @keyframes float {
-                0% { 
-                    transform: translateY(0) scale(1); opacity: 1; 
-                }
-                50% { 
-                    transform: translateY(-400px) scale(1.2); opacity: 0.8; 
-                }
-                100% { 
-                    transform: translateY(-800px) scale(1); opacity: 0; 
-                }
+                0%   { transform: translateY(0) scale(1);    opacity: 1; }
+                50%  { transform: translateY(-400px) scale(1.2); opacity: 0.8; }
+                100% { transform: translateY(-800px) scale(1);   opacity: 0; }
             }
 
             @keyframes pulse {
-                0% { 
-                    transform: scale(1); 
-                }
-                50% { 
-                    transform: scale(1.05); 
-                }
-                100% { 
-                    transform: scale(1); 
-                }
+                0%,100% { transform: scale(1); }
+                50%     { transform: scale(1.05); }
             }
 
             @media only screen and (max-width: 480px) {
-                .site-header {
-                    padding: 15px 20px;
-                }
-                
-                .header-logo {
-                    font-size: 18px;
-                }
-
+                .site-header { padding: 15px 20px; }
+                .header-logo { font-size: 18px; }
                 .envelope {
-                    width: 90vw;   
-                    height: auto;  
-                    aspect-ratio: 4/3; 
+                    width: 90vw;
+                    height: auto;
+                    aspect-ratio: 4/3;
                 }
-
                 .letter {
                     font-size: 16px;
                     width: 90%;
                     height: 85%;
                     padding: 15px;
                 }
-
                 button {
                     padding: 12px 30px;
                     font-size: 16px;
                     border-radius: 25px;
                 }
-
-                .heart {
-                    font-size: 15px !important; 
-                }
+                .heart { font-size: 15px !important; }
+                .lock-card { padding: 36px 24px 30px; }
             }
         </style>
-
     </head>
 
 <body>
 
-    <header class="site-header">
-        <a class="header-logo">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314"/></svg>ヘイガー
-        </a>
-        <div class="header-socials">
-            <!-- <a href="" title="Our Moments"><i class="fa-solid fa-star"></i></a> -->
-            <a href="https://github.com/BassemMohamed44/Velix-App/releases/download/v2.1.2/MYANGEL.exe" title="Love"><i class="fa-solid fa-infinity"></i></a>
-        </div>
-    </header>
-
-    <div class="container">
-        <div class="envelope" id="envelope">
-            <div class="flap"></div>
-            <div class="letter">
-                <p id="message"></p>
+    <!-- ========== PASSWORD SCREEN ========== -->
+    <div id="password-screen">
+        <div class="lock-card">
+            <div class="lock-icon">💖</div>
+            <p class="lock-hint">اكتبي تاريخ ميلاد كل واحد فينا 💕<br><span style="font-size:11px;opacity:.75;"></span></p>
+            <div class="pw-fields">
+                <div>
+                    <div class="pw-field-label">تاريخ ميلادي</div>
+                    <div class="pw-wrapper">
+                        <input class="pw-input" id="pw-input-1" type="password" placeholder="تاريخ ميلادي ..." maxlength="20" autocomplete="off" />
+                        <button class="toggle-pw" data-target="pw-input-1" title="إظهار/إخفاء">
+                            <i class="fa-solid fa-eye"></i>
+                        </button>
+                    </div>
+                </div>
+                <div>
+                    <div class="pw-field-label">تاريخ ميلادك</div>
+                    <div class="pw-wrapper">
+                        <input class="pw-input" id="pw-input-2" type="password" placeholder="تاريخ ميلادك ..." maxlength="20" autocomplete="off" />
+                        <button class="toggle-pw" data-target="pw-input-2" title="إظهار/إخفاء">
+                            <i class="fa-solid fa-eye"></i>
+                        </button>
+                    </div>
+                </div>
             </div>
+            <div id="pw-error">❌ كلمة السر غلط، حاولي تاني</div>
+            <button id="pw-submit">ادخلي</button>
         </div>
-        <button id="openBtn">CLICK HERE</button>
+    </div>
+
+    <!-- ========== MAIN CONTENT ========== -->
+    <div id="main-content">
+        <header class="site-header">
+            <a class="header-logo">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314"/></svg>ヘイガー
+            </a>
+            <div class="header-socials">
+                <a href="https://github.com/BassemMohamed44/Velix-App/releases/download/v2.1.2/MYANGEL.exe" title="Love"><i class="fa-solid fa-infinity"></i></a>
+            </div>
+        </header>
+
+        <div class="container">
+            <div class="envelope" id="envelope">
+                <div class="flap"></div>
+                <div class="letter">
+                    <p id="message"></p>
+                </div>
+            </div>
+            <button id="openBtn">CLICK HERE</button>
+        </div>
     </div>
 
     <audio id="loveSound">
@@ -252,73 +463,130 @@
     </audio>
 
     <script>
-        const button = document.getElementById("openBtn")
-        const envelope = document.getElementById("envelope")
-        const message = document.getElementById("message")
-        const sound = document.getElementById("loveSound")
-        const text = "عايزك تفتكري دايما اني جنبك و معاكي وهفضل سندك و مش هبعد ابدا عنك بل العكس انا حبيتك اكتر ومبسوط بكل لحظة بيني وبينك المدة صغيرة بس بالنسبالي كبيرة اوي ...  I Love You Hager💖"
-        let opened = false
-        let messageTyped = false
-        let heartsInterval = null
-        sound.volume = 0.1
+        /* ===== PASSWORD LOGIC ===== */
+        // Accepted values for each field
+        const VALID_1 = ["2912006", "29/1/2006", "29/1/2006"]; 
+        const VALID_2 = ["1512007", "15/1/2007", "15/1/2007"];
+
+        const pwScreen    = document.getElementById("password-screen");
+        const pwInput1    = document.getElementById("pw-input-1");
+        const pwInput2    = document.getElementById("pw-input-2");
+        const pwSubmit    = document.getElementById("pw-submit");
+        const pwError     = document.getElementById("pw-error");
+        const mainContent = document.getElementById("main-content");
+
+        // Background floating hearts on password screen
+        function spawnBgHeart() {
+            const h = document.createElement("div");
+            h.className = "bg-heart";
+            h.textContent = ["💗","💕","💖","💓","💞"][Math.floor(Math.random()*5)];
+            h.style.left = Math.random() * 95 + "vw";
+            h.style.fontSize = (Math.random() * 20 + 14) + "px";
+            h.style.animationDuration = (Math.random() * 8 + 7) + "s";
+            h.style.animationDelay = "0s";
+            pwScreen.appendChild(h);
+            setTimeout(() => h.remove(), 16000);
+        }
+        setInterval(spawnBgHeart, 1200);
+        spawnBgHeart(); spawnBgHeart(); spawnBgHeart();
+
+        // Toggle show/hide for each input
+        document.querySelectorAll(".toggle-pw").forEach(btn => {
+            btn.addEventListener("click", () => {
+                const input = document.getElementById(btn.dataset.target);
+                const isHidden = input.type === "password";
+                input.type = isHidden ? "text" : "password";
+                btn.querySelector("i").className = isHidden
+                    ? "fa-solid fa-eye-slash"
+                    : "fa-solid fa-eye";
+            });
+        });
+
+        function shakeInput(input) {
+            input.classList.add("shake");
+            input.addEventListener("animationend", () =>
+                input.classList.remove("shake"), { once: true });
+        }
+
+        function checkPassword() {
+            const v1 = pwInput1.value.trim().replace(/\s/g,"");
+            const v2 = pwInput2.value.trim().replace(/\s/g,"");
+
+            const ok1 = VALID_1.includes(v1);
+            const ok2 = VALID_2.includes(v2);
+
+            if (ok1 && ok2) {
+                unlockSite();
+            } else {
+                pwError.classList.add("show");
+                if (!ok1) shakeInput(pwInput1);
+                if (!ok2) shakeInput(pwInput2);
+                setTimeout(() => pwError.classList.remove("show"), 3000);
+            }
+        }
+
+        pwSubmit.addEventListener("click", checkPassword);
+        [pwInput1, pwInput2].forEach(inp =>
+            inp.addEventListener("keydown", e => { if (e.key === "Enter") checkPassword(); }));
+
+        function unlockSite() {
+            pwScreen.classList.add("fade-out");
+            mainContent.classList.add("visible");
+            setTimeout(() => pwScreen.remove(), 700);
+        }
+
+        /* ===== ENVELOPE / MAIN LOGIC ===== */
+        const button  = document.getElementById("openBtn");
+        const envelope = document.getElementById("envelope");
+        const message  = document.getElementById("message");
+        const sound    = document.getElementById("loveSound");
+        const text = "عايزك تفتكري دايما اني جنبك و معاكي وهفضل سندك و مش هبعد ابدا عنك بل العكس انا حبيتك اكتر ومبسوط بكل لحظة بيني وبينك المدة صغيرة بس بالنسبالي كبيرة اوي ...  I Love You Hager💖";
+        let opened = false, messageTyped = false, heartsInterval = null;
+        sound.volume = 0.1;
 
         button.addEventListener("click", () => {
             if (!opened) {
-                envelope.classList.add("open")
-                button.textContent = "CLOSE"
-
-                sound.currentTime = 0
-                sound.play().catch(err => console.log("Audio failed:", err))
-
-                if (!messageTyped) {
-                    typeTextColored()
-                    messageTyped = true
-                }
-
-                startHearts()
-                opened = true
+                envelope.classList.add("open");
+                button.textContent = "CLOSE";
+                sound.currentTime = 0;
+                sound.play().catch(err => console.log("Audio failed:", err));
+                if (!messageTyped) { typeTextColored(); messageTyped = true; }
+                startHearts();
+                opened = true;
             } else {
-                envelope.classList.remove("open")
-                button.textContent = "CLICK HERE" 
-
-                sound.pause()
-                sound.currentTime = 0
-
-                stopHearts()
-                opened = false
+                envelope.classList.remove("open");
+                button.textContent = "CLICK HERE";
+                sound.pause(); sound.currentTime = 0;
+                stopHearts();
+                opened = false;
             }
-        })
+        });
 
         function typeTextColored() {
-            let i = 0
-            const colors = ["#ff4d6d","#ff7f99","#ff9bb0","#ffb6c1","#ce6891","#ff749d"]
-            const typing = setInterval(()=>{
-                const span = document.createElement("span")
-                span.textContent = text[i]
-                span.style.color = colors[i % colors.length]
-                span.style.transition = "color 0.3s ease"
-                message.appendChild(span)
-                i++
-                if(i>=text.length) clearInterval(typing)
-            },100)
+            let i = 0;
+            const colors = ["#ff4d6d","#ff7f99","#ff9bb0","#ffb6c1","#ce6891","#ff749d"];
+            const typing = setInterval(() => {
+                const span = document.createElement("span");
+                span.textContent = text[i];
+                span.style.color = colors[i % colors.length];
+                span.style.transition = "color 0.3s ease";
+                message.appendChild(span);
+                i++;
+                if (i >= text.length) clearInterval(typing);
+            }, 100);
         }
 
-        function startHearts() {
-            heartsInterval = setInterval(createHeart, 300) 
-        }
-
-        function stopHearts() {
-            clearInterval(heartsInterval)
-        }
+        function startHearts()  { heartsInterval = setInterval(createHeart, 300); }
+        function stopHearts()   { clearInterval(heartsInterval); }
 
         function createHeart() {
-            const heart = document.createElement("div")
-            heart.className = "heart"
-            heart.innerHTML = "💖"
-            heart.style.left = Math.random() * 90 + "vw"
-            heart.style.fontSize = (Math.random() * 20 + 10) + "px"
-            document.body.appendChild(heart)
-            setTimeout(() => heart.remove(), 4000)
+            const heart = document.createElement("div");
+            heart.className = "heart";
+            heart.innerHTML = "💖";
+            heart.style.left = Math.random() * 90 + "vw";
+            heart.style.fontSize = (Math.random() * 20 + 10) + "px";
+            document.body.appendChild(heart);
+            setTimeout(() => heart.remove(), 4000);
         }
     </script>
 
