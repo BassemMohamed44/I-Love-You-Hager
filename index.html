@@ -521,6 +521,123 @@
                 padding: 4px 8px;
             }
 
+            .chat-header-actions {
+                display: flex;
+                align-items: center;
+                gap: 4px;
+            }
+
+            .chat-header-actions button {
+                font-size: 15px;
+            }
+
+            #backupNowBtn.backup-done {
+                color: #baffc9;
+            }
+
+            #archive-window, #archive-detail-window {
+                flex-direction: column;
+                width: min(400px, 92vw);
+                height: min(560px, 80vh);
+                overflow: hidden;
+            }
+
+            #archive-list {
+                flex: 1;
+                overflow-y: auto;
+                padding: 14px;
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+                background: #fff5f7;
+            }
+
+            .archive-item {
+                background: white;
+                border: 1px solid #ffd1dc;
+                border-radius: 14px;
+                padding: 12px 16px;
+                cursor: pointer;
+                transition: transform 0.15s;
+                text-align: right;
+            }
+
+            .archive-item:hover { transform: scale(1.01); background: #fff0f3; }
+
+            .archive-item .archive-item-title {
+                font-weight: 700;
+                font-size: 14px;
+                color: #ff4d6d;
+            }
+
+            .archive-item .archive-item-meta {
+                font-size: 12px;
+                color: #999;
+                margin-top: 4px;
+            }
+
+            .archive-empty {
+                text-align: center;
+                color: #999;
+                font-size: 14px;
+                padding: 40px 20px;
+            }
+
+            .archive-add-row {
+                display: flex;
+                gap: 8px;
+                padding: 12px;
+                background: white;
+                border-bottom: 1px solid #ffe0e6;
+            }
+
+            .archive-add-row input {
+                flex: 1;
+                padding: 10px 14px;
+                border: 2px solid #ffd1dc;
+                border-radius: 16px;
+                font-size: 13px;
+                outline: none;
+                font-family: 'Inter', sans-serif;
+                direction: ltr;
+                text-align: right;
+            }
+
+            .archive-add-row input:focus { border-color: #ff4d6d; }
+
+            .archive-add-row button {
+                width: 38px;
+                height: 38px;
+                border-radius: 50%;
+                background: #ff4d6d;
+                color: white;
+                border: none;
+                cursor: pointer;
+                animation: none;
+                box-shadow: 0 4px 12px rgba(255,77,109,0.35);
+                flex-shrink: 0;
+            }
+
+            .archive-item .archive-item-remove {
+                float: left;
+                color: #ff4d6d;
+                font-size: 12px;
+                cursor: pointer;
+                opacity: 0.7;
+            }
+
+            .archive-item .archive-item-remove:hover { opacity: 1; }
+
+            #archive-detail-messages {
+                flex: 1;
+                overflow-y: auto;
+                padding: 16px;
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+                background: #fff5f7;
+            }
+
             #chat-messages {
                 flex: 1;
                 overflow-y: auto;
@@ -549,6 +666,61 @@
                 opacity: 0.7;
             }
 
+            .msg-bubble .msg-time {
+                display: block;
+                font-size: 10px;
+                opacity: 0.6;
+                margin-top: 4px;
+                text-align: left;
+            }
+
+            .msg-bubble .msg-reply-quote {
+                display: block;
+                font-size: 11px;
+                padding: 5px 8px;
+                border-radius: 8px;
+                margin-bottom: 5px;
+                opacity: 0.8;
+                border-right: 3px solid currentColor;
+                background: rgba(0,0,0,0.06);
+                cursor: pointer;
+            }
+
+            .msg-mine .msg-reply-quote { background: rgba(255,255,255,0.2); }
+
+            .msg-bubble { cursor: pointer; }
+
+            #reply-preview {
+                display: none;
+                align-items: center;
+                justify-content: space-between;
+                padding: 8px 14px;
+                background: #ffeef2;
+                border-top: 1px solid #ffd1dc;
+                font-size: 12px;
+                color: #ff4d6d;
+            }
+
+            #reply-preview.visible { display: flex; }
+
+            #reply-preview .reply-preview-text {
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                flex: 1;
+            }
+
+            #reply-preview button {
+                background: none;
+                border: none;
+                color: #ff4d6d;
+                cursor: pointer;
+                font-size: 14px;
+                animation: none;
+                box-shadow: none;
+                padding: 2px 8px;
+            }
+
             .msg-mine {
                 align-self: flex-start;
                 background: linear-gradient(135deg, #ff4d6d, #ff7f99);
@@ -563,6 +735,18 @@
                 border: 1px solid #ffd1dc;
                 border-bottom-right-radius: 4px;
             }
+
+            #typing-indicator {
+                min-height: 20px;
+                padding: 0 16px 4px;
+                font-size: 12px;
+                color: #ff4d6d;
+                font-style: italic;
+                opacity: 0;
+                transition: opacity 0.2s;
+            }
+
+            #typing-indicator.visible { opacity: 1; }
 
             .chat-input-row {
                 display: flex;
@@ -689,13 +873,46 @@
         <div id="chat-window" class="chat-card">
             <div class="chat-header">
                 <span id="chat-title">الشات بينا 💕</span>
-                <button id="closeChatBtn" title="قفل"><i class="fa-solid fa-xmark"></i></button>
+                <div class="chat-header-actions">
+                    <button id="backupNowBtn" title="نزّل نسخة"><i class="fa-solid fa-download"></i></button>
+                    <button id="openArchiveBtn" title="الشات القديم"><i class="fa-solid fa-clock-rotate-left"></i></button>
+                    <button id="closeChatBtn" title="قفل"><i class="fa-solid fa-xmark"></i></button>
+                </div>
             </div>
             <div id="chat-messages"></div>
+            <div id="typing-indicator"></div>
+            <div id="reply-preview">
+                <span class="reply-preview-text" id="reply-preview-text"></span>
+                <button id="reply-preview-cancel"><i class="fa-solid fa-xmark"></i></button>
+            </div>
             <div class="chat-input-row">
                 <input id="chat-input" type="text" placeholder="اكتب حاجة حلوة..." autocomplete="off" />
                 <button id="chat-send"><i class="fa-solid fa-paper-plane"></i></button>
             </div>
+        </div>
+
+        <div id="archive-window" class="chat-card">
+            <div class="chat-header">
+                <span>الشات القديم 📜</span>
+                <div class="chat-header-actions">
+                    <button id="closeArchiveBtn" title="رجوع"><i class="fa-solid fa-xmark"></i></button>
+                </div>
+            </div>
+            <div class="archive-add-row">
+                <input id="archive-url-input" type="text" placeholder="الصق رابط ملف النسخة هنا..." autocomplete="off" />
+                <button id="archive-url-add"><i class="fa-solid fa-plus"></i></button>
+            </div>
+            <div id="archive-list"></div>
+        </div>
+
+        <div id="archive-detail-window" class="chat-card">
+            <div class="chat-header">
+                <span id="archive-detail-title">نسخة قديمة</span>
+                <div class="chat-header-actions">
+                    <button id="backToArchiveListBtn" title="رجوع للقائمة"><i class="fa-solid fa-arrow-right"></i></button>
+                </div>
+            </div>
+            <div id="archive-detail-messages"></div>
         </div>
     </div>
 
@@ -855,6 +1072,16 @@
         const chatInput        = document.getElementById("chat-input");
         const chatSend         = document.getElementById("chat-send");
 
+        const backupNowBtn        = document.getElementById("backupNowBtn");
+        const openArchiveBtn      = document.getElementById("openArchiveBtn");
+        const closeArchiveBtn     = document.getElementById("closeArchiveBtn");
+        const archiveWindow       = document.getElementById("archive-window");
+        const archiveList         = document.getElementById("archive-list");
+        const archiveDetailWindow  = document.getElementById("archive-detail-window");
+        const archiveDetailTitle   = document.getElementById("archive-detail-title");
+        const archiveDetailMessages = document.getElementById("archive-detail-messages");
+        const backToArchiveListBtn = document.getElementById("backToArchiveListBtn");
+
         // Identity is set ONCE per browser, right after the password screen, by
         // confirming which of the two birth dates just typed belongs to this person.
         // After that first confirmation it's remembered — no picking a name later,
@@ -895,10 +1122,12 @@
 
         function showChat() {
             chatOverlay.classList.add("visible");
+            archiveWindow.classList.remove("visible");
+            archiveDetailWindow.classList.remove("visible");
             if (myName) {
                 chatBlockedScreen.classList.remove("visible");
                 chatWindow.classList.add("visible");
-                if (!messagesLoaded) { listenForMessages(); messagesLoaded = true; }
+                if (!messagesLoaded) { listenForMessages(); listenForTyping(); messagesLoaded = true; }
                 chatInput.focus();
             } else {
                 chatBlockedScreen.classList.add("visible");
@@ -909,6 +1138,8 @@
 
         function hideChat() {
             chatOverlay.classList.remove("visible");
+            archiveWindow.classList.remove("visible");
+            archiveDetailWindow.classList.remove("visible");
         }
 
         openChatBtn.addEventListener("click", (e) => { e.preventDefault(); showChat(); });
@@ -921,20 +1152,233 @@
         function listenForMessages() {
             chatRef.limitToLast(200).on("child_added", (snapshot) => {
                 const msg = snapshot.val();
-                appendMessage(msg);
+                appendMessage(msg, snapshot.key);
             });
         }
 
-        function appendMessage(msg) {
+        // ---- Manual backups: download a file, then paste its hosted link here ----
+        // The archive FILES (actual messages) stay outside Firebase entirely —
+        // you upload them yourself (GitHub, etc). Only the tiny link text itself
+        // is synced through Firebase, so it shows up automatically on both sides
+        // without her needing to paste anything.
+        const archiveLinksRef = db.ref("archiveLinks");
+        let archiveLinksCache = [];
+        let archiveLinksLoaded = false;
+
+        function listenForArchiveLinks() {
+            archiveLinksRef.on("value", (snapshot) => {
+                const data = snapshot.val() || {};
+                archiveLinksCache = Object.entries(data)
+                    .map(([key, val]) => ({ key, url: val.url, addedAt: val.addedAt || 0 }))
+                    .sort((a, b) => a.addedAt - b.addedAt);
+                if (archiveWindow.classList.contains("visible")) renderArchiveList();
+            });
+        }
+
+        function showArchiveList() {
+            chatWindow.classList.remove("visible");
+            archiveDetailWindow.classList.remove("visible");
+            archiveWindow.classList.add("visible");
+            if (!archiveLinksLoaded) { listenForArchiveLinks(); archiveLinksLoaded = true; }
+            renderArchiveList();
+        }
+
+        function hideArchiveList() {
+            archiveWindow.classList.remove("visible");
+            chatWindow.classList.add("visible");
+        }
+
+        function renderArchiveList() {
+            archiveList.innerHTML = "";
+            if (archiveLinksCache.length === 0) {
+                archiveList.innerHTML = "<p class='archive-empty'>لسه مفيش نسخ مضافة.</p>";
+                return;
+            }
+            archiveLinksCache.forEach((entry, idx) => {
+                const item = document.createElement("div");
+                item.className = "archive-item";
+                const remove = document.createElement("span");
+                remove.className = "archive-item-remove";
+                remove.innerHTML = '<i class="fa-solid fa-trash"></i>';
+                remove.addEventListener("click", (e) => {
+                    e.stopPropagation();
+                    archiveLinksRef.child(entry.key).remove();
+                });
+                const title = document.createElement("div");
+                title.className = "archive-item-title";
+                title.textContent = "نسخة " + (idx + 1);
+                const meta = document.createElement("div");
+                meta.className = "archive-item-meta";
+                meta.textContent = entry.url;
+                item.appendChild(remove);
+                item.appendChild(title);
+                item.appendChild(meta);
+                item.addEventListener("click", () => showArchiveDetail(entry.url, idx + 1));
+                archiveList.appendChild(item);
+            });
+        }
+
+        document.getElementById("archive-url-add").addEventListener("click", () => {
+            const input = document.getElementById("archive-url-input");
+            const url = input.value.trim();
+            if (!url) return;
+            archiveLinksRef.push({ url: url, addedAt: Date.now(), addedBy: myName || "" });
+            input.value = "";
+        });
+
+        async function showArchiveDetail(url, num) {
+            archiveWindow.classList.remove("visible");
+            archiveDetailWindow.classList.add("visible");
+            archiveDetailTitle.textContent = "نسخة " + num;
+            archiveDetailMessages.innerHTML = "<p class='archive-empty'>بتحمل...</p>";
+            try {
+                const res = await fetch(url);
+                if (!res.ok) throw new Error("fetch failed");
+                const data = await res.json();
+                const messages = Array.isArray(data) ? data : (data.messages || []);
+                archiveDetailMessages.innerHTML = "";
+                if (messages.length === 0) {
+                    archiveDetailMessages.innerHTML = "<p class='archive-empty'>الملف مفيهوش رسايل</p>";
+                    return;
+                }
+                messages.forEach(msg => {
+                    const bubble = document.createElement("div");
+                    bubble.className = "msg-bubble " + (msg.sender === myName ? "msg-mine" : "msg-theirs");
+                    const senderLabel = document.createElement("span");
+                    senderLabel.className = "msg-sender";
+                    senderLabel.textContent = msg.sender;
+                    const textLine = document.createElement("span");
+                    textLine.textContent = msg.text;
+                    bubble.appendChild(senderLabel);
+                    bubble.appendChild(textLine);
+                    archiveDetailMessages.appendChild(bubble);
+                });
+            } catch (err) {
+                archiveDetailMessages.innerHTML = "<p class='archive-empty'>مقدرتش أجيب الملف، تأكد إن الرابط شغال ومباشر لملف JSON</p>";
+            }
+        }
+
+        function downloadBackupNow() {
+            if (!myName) return;
+            backupNowBtn.disabled = true;
+            chatRef.once("value", (snapshot) => {
+                backupNowBtn.disabled = false;
+                const data = snapshot.val() || {};
+                const messages = Object.values(data).sort((a, b) => a.time - b.time);
+                const payload = {
+                    createdAt: Date.now(),
+                    takenBy: myName,
+                    messages: messages
+                };
+                const blob = new Blob([JSON.stringify(payload, null, 2)], { type: "application/json" });
+                const link = document.createElement("a");
+                link.href = URL.createObjectURL(blob);
+                const stamp = new Date().toISOString().slice(0, 10);
+                link.download = "love-chat-backup-" + stamp + ".json";
+                link.click();
+                URL.revokeObjectURL(link.href);
+            });
+        }
+
+        backupNowBtn.addEventListener("click", downloadBackupNow);
+        openArchiveBtn.addEventListener("click", showArchiveList);
+        closeArchiveBtn.addEventListener("click", hideArchiveList);
+        backToArchiveListBtn.addEventListener("click", showArchiveList);
+
+
+        // ---- Typing indicator ----
+        const typingRef = db.ref("typing");
+        const typingIndicator = document.getElementById("typing-indicator");
+        let typingTimeout = null;
+
+        function listenForTyping() {
+            typingRef.on("value", (snapshot) => {
+                const data = snapshot.val() || {};
+                const otherIsTyping = Object.keys(data).some(
+                    name => name !== myName && data[name] === true
+                );
+                if (otherIsTyping) {
+                    const otherName = myName === NAME_1 ? NAME_2 : NAME_1;
+                    typingIndicator.textContent = otherName + " بتكتب...";
+                    typingIndicator.classList.add("visible");
+                } else {
+                    typingIndicator.classList.remove("visible");
+                }
+            });
+        }
+
+        function setTypingState(isTyping) {
+            if (!myName) return;
+            typingRef.child(myName).set(isTyping);
+        }
+
+        chatInput.addEventListener("input", () => {
+            setTypingState(true);
+            clearTimeout(typingTimeout);
+            typingTimeout = setTimeout(() => setTypingState(false), 2000);
+        });
+
+        window.addEventListener("beforeunload", () => setTypingState(false));
+
+        // ---- Reply state ----
+        let replyTarget = null; // { key, sender, text }
+        const messagesByKey = {};
+        const replyPreview = document.getElementById("reply-preview");
+        const replyPreviewText = document.getElementById("reply-preview-text");
+        document.getElementById("reply-preview-cancel").addEventListener("click", clearReplyTarget);
+
+        function setReplyTarget(key) {
+            const target = messagesByKey[key];
+            if (!target) return;
+            replyTarget = { key: key, sender: target.sender, text: target.text };
+            replyPreviewText.textContent = target.sender + ": " + target.text;
+            replyPreview.classList.add("visible");
+            chatInput.focus();
+        }
+
+        function clearReplyTarget() {
+            replyTarget = null;
+            replyPreview.classList.remove("visible");
+        }
+
+        function formatTime(ts) {
+            if (!ts) return "";
+            return new Date(ts).toLocaleTimeString("ar-EG", { hour: "2-digit", minute: "2-digit" });
+        }
+
+        function appendMessage(msg, key) {
             const bubble = document.createElement("div");
             bubble.className = "msg-bubble " + (msg.sender === myName ? "msg-mine" : "msg-theirs");
+            messagesByKey[key] = msg;
+
+            if (msg.replyTo && messagesByKey[msg.replyTo]) {
+                const quoted = messagesByKey[msg.replyTo];
+                const quote = document.createElement("span");
+                quote.className = "msg-reply-quote";
+                quote.textContent = quoted.sender + ": " + quoted.text;
+                quote.addEventListener("click", (e) => {
+                    e.stopPropagation();
+                    const target = chatMessages.querySelector('[data-key="' + msg.replyTo + '"]');
+                    if (target) target.scrollIntoView({ behavior: "smooth", block: "center" });
+                });
+                bubble.appendChild(quote);
+            }
+
             const senderLabel = document.createElement("span");
             senderLabel.className = "msg-sender";
             senderLabel.textContent = msg.sender;
             const textLine = document.createElement("span");
             textLine.textContent = msg.text;
+            const timeLabel = document.createElement("span");
+            timeLabel.className = "msg-time";
+            timeLabel.textContent = formatTime(msg.time);
+
             bubble.appendChild(senderLabel);
             bubble.appendChild(textLine);
+            bubble.appendChild(timeLabel);
+            bubble.dataset.key = key;
+            bubble.addEventListener("click", () => setReplyTarget(key));
+
             chatMessages.appendChild(bubble);
             chatMessages.scrollTop = chatMessages.scrollHeight;
         }
@@ -942,12 +1386,17 @@
         function sendMessage() {
             const text = chatInput.value.trim();
             if (!text || !myName) return;
-            chatRef.push({
+            const payload = {
                 sender: myName,
                 text: text,
                 time: Date.now()
-            });
+            };
+            if (replyTarget) payload.replyTo = replyTarget.key;
+            chatRef.push(payload);
             chatInput.value = "";
+            clearReplyTarget();
+            clearTimeout(typingTimeout);
+            setTypingState(false);
         }
 
         chatSend.addEventListener("click", sendMessage);
