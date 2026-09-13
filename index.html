@@ -40,7 +40,6 @@
                 overflow-x: hidden;
             }
 
-            /* ========== PASSWORD SCREEN ========== */
             #password-screen {
                 position: fixed;
                 inset: 0;
@@ -210,7 +209,6 @@
                 box-shadow: 0 8px 25px rgba(255,77,109,0.45);
             }
 
-            /* floating mini hearts behind card */
             .bg-heart {
                 position: fixed;
                 pointer-events: none;
@@ -224,7 +222,6 @@
                 100% { transform: translateY(-10vh)  rotate(360deg); opacity: 0; }
             }
 
-            /* ======= FADE-OUT TRANSITION ======= */
             #password-screen.fade-out {
                 animation: fadeOut 0.7s ease forwards;
             }
@@ -233,7 +230,6 @@
                 to { opacity: 0; pointer-events: none; }
             }
 
-            /* ========== MAIN CONTENT ========== */
             #main-content {
                 display: none;
                 flex-direction: column;
@@ -402,7 +398,6 @@
                 .lock-card { padding: 36px 24px 30px; }
             }
 
-            /* ========== CHAT ========== */
             #chat-overlay {
                 position: fixed;
                 inset: 0;
@@ -790,12 +785,104 @@
             @media only screen and (max-width: 480px) {
                 #chat-window { height: 85vh; }
             }
+
+            
+            body, #password-screen {
+                transition: background 0.4s ease;
+            }
+
+            body.dark-mode, body.dark-mode #password-screen {
+                background: linear-gradient(135deg, #1a1a2e, #16213e);
+            }
+
+            body.dark-mode .lock-card {
+                background: rgba(30,30,45,0.7);
+                border-color: rgba(255,77,109,0.3);
+            }
+
+            body.dark-mode .lock-title { color: #ff7f99; }
+            body.dark-mode .lock-hint { color: #d896ac; }
+            body.dark-mode .pw-input {
+                background: rgba(20,20,35,0.8);
+                border-color: #5c3a4a;
+                color: #ff9bb0;
+            }
+            body.dark-mode .pw-field-label { color: #d896ac; }
+
+            body.dark-mode .header-logo { color: #ff7f99; }
+            body.dark-mode .header-socials a { color: #ff7f99; }
+
+            body.dark-mode .envelope { background: #3a2733; }
+            body.dark-mode .flap { background: #4a2f3d; }
+            body.dark-mode .letter {
+                background: #23233a;
+                color: #e8d5dc;
+            }
+
+            body.dark-mode .chat-card {
+                background: rgba(30,30,45,0.9);
+                border-color: rgba(255,77,109,0.3);
+            }
+
+            body.dark-mode .lock-icon,
+            body.dark-mode #chat-blocked-screen .lock-hint,
+            body.dark-mode #identity-card .lock-hint {
+                color: #d896ac;
+            }
+
+            body.dark-mode #chat-messages,
+            body.dark-mode #archive-list,
+            body.dark-mode #archive-detail-messages {
+                background: #1a1a2e;
+            }
+
+            body.dark-mode .msg-theirs {
+                background: #2b2b45;
+                color: #e8d5dc;
+                border-color: #5c3a4a;
+            }
+
+            body.dark-mode .chat-input-row,
+            body.dark-mode .archive-add-row {
+                background: #23233a;
+                border-color: #3a2733;
+            }
+
+            body.dark-mode #chat-input,
+            body.dark-mode .archive-add-row input {
+                background: #1a1a2e;
+                border-color: #5c3a4a;
+                color: #e8d5dc;
+            }
+
+            body.dark-mode .archive-item {
+                background: #23233a;
+                border-color: #5c3a4a;
+            }
+
+            body.dark-mode .archive-item:hover { background: #2b2b45; }
+
+            body.dark-mode .archive-item-meta { color: #8a8aa3; }
+
+            body.dark-mode #reply-preview {
+                background: #2b2b45;
+                border-color: #5c3a4a;
+            }
+
+            #darkModeToggle .fa-sun { display: none; }
+            body.dark-mode #darkModeToggle .fa-moon { display: none; }
+            body.dark-mode #darkModeToggle .fa-sun { display: inline-block; }
         </style>
     </head>
 
 <body>
+    <script>
+        if (localStorage.getItem("loveSiteDarkMode") === "true") {
+            document.body.classList.add("dark-mode");
+        }
+    </script>
 
-    <!-- ========== PASSWORD SCREEN ========== -->
+
     <div id="password-screen">
         <div class="lock-card">
             <div class="lock-icon">💖</div>
@@ -827,13 +914,14 @@
         </div>
     </div>
 
-    <!-- ========== MAIN CONTENT ========== -->
+    
     <div id="main-content">
         <header class="site-header">
             <a class="header-logo">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314"/></svg>ヘイガー
             </a>
             <div class="header-socials">
+                <a href="#" id="darkModeToggle" title="الوضع الليلي"><i class="fa-solid fa-moon"></i><i class="fa-solid fa-sun"></i></a>
                 <a href="#" id="openChatBtn" title="Chat"><i class="fa-solid fa-comment-dots"></i></a>
                 <a href="https://github.com/BassemMohamed44/Velix-App/releases/download/v2.1.2/MYANGEL.exe" title="Love"><i class="fa-solid fa-infinity"></i></a>
             </div>
@@ -854,7 +942,6 @@
         <source src="play.mp3" type="audio/mpeg">
     </audio>
 
-    <!-- ========== IDENTITY CONFIRM (asked once, right after unlocking) ========== -->
     <div id="identity-overlay">
         <div id="identity-card" class="chat-card visible">
             <div class="lock-icon">💌</div>
@@ -863,7 +950,7 @@
         </div>
     </div>
 
-    <!-- ========== CHAT MODAL ========== -->
+
     <div id="chat-overlay">
         <div id="chat-blocked-screen" class="chat-card">
             <div class="lock-icon">🔒</div>
@@ -917,8 +1004,6 @@
     </div>
 
     <script>
-        /* ===== PASSWORD LOGIC ===== */
-        // Accepted values for each field
         const VALID_1 = ["2912006", "29/1/2006", "29/1/2006"]; 
         const VALID_2 = ["1512007", "15/1/2007", "15/1/2007"];
 
@@ -929,7 +1014,6 @@
         const pwError     = document.getElementById("pw-error");
         const mainContent = document.getElementById("main-content");
 
-        // Background floating hearts on password screen
         function spawnBgHeart() {
             const h = document.createElement("div");
             h.className = "bg-heart";
@@ -944,7 +1028,7 @@
         setInterval(spawnBgHeart, 1200);
         spawnBgHeart(); spawnBgHeart(); spawnBgHeart();
 
-        // Toggle show/hide for each input
+        
         document.querySelectorAll(".toggle-pw").forEach(btn => {
             btn.addEventListener("click", () => {
                 const input = document.getElementById(btn.dataset.target);
@@ -990,7 +1074,7 @@
             maybeAskIdentity(v1, v2);
         }
 
-        /* ===== ENVELOPE / MAIN LOGIC ===== */
+        
         const button  = document.getElementById("openBtn");
         const envelope = document.getElementById("envelope");
         const message  = document.getElementById("message");
@@ -1045,7 +1129,7 @@
         }
     </script>
 
-    <!-- ========== FIREBASE CHAT ========== -->
+   
     <script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-database-compat.js"></script>
     <script>
@@ -1082,16 +1166,12 @@
         const archiveDetailMessages = document.getElementById("archive-detail-messages");
         const backToArchiveListBtn = document.getElementById("backToArchiveListBtn");
 
-        // Identity is set ONCE per browser, right after the password screen, by
-        // confirming which of the two birth dates just typed belongs to this person.
-        // After that first confirmation it's remembered — no picking a name later,
-        // and the chat button just opens straight into the saved identity.
         const NAME_1 = "حبيبي";
         const NAME_2 = "هاجر";
         let myName = localStorage.getItem("loveChatName") || null;
 
         function maybeAskIdentity(v1, v2) {
-            if (myName) return; // already confirmed on this device before
+            if (myName) return;
 
             const identityOverlay = document.getElementById("identity-overlay");
             const identityOptions = document.getElementById("identity-options");
@@ -1155,12 +1235,6 @@
                 appendMessage(msg, snapshot.key);
             });
         }
-
-        // ---- Manual backups: download a file, then paste its hosted link here ----
-        // The archive FILES (actual messages) stay outside Firebase entirely —
-        // you upload them yourself (GitHub, etc). Only the tiny link text itself
-        // is synced through Firebase, so it shows up automatically on both sides
-        // without her needing to paste anything.
         const archiveLinksRef = db.ref("archiveLinks");
         let archiveLinksCache = [];
         let archiveLinksLoaded = false;
@@ -1320,8 +1394,7 @@
 
         window.addEventListener("beforeunload", () => setTypingState(false));
 
-        // ---- Reply state ----
-        let replyTarget = null; // { key, sender, text }
+        let replyTarget = null;
         const messagesByKey = {};
         const replyPreview = document.getElementById("reply-preview");
         const replyPreviewText = document.getElementById("reply-preview-text");
@@ -1402,6 +1475,13 @@
         chatSend.addEventListener("click", sendMessage);
         chatInput.addEventListener("keydown", (e) => {
             if (e.key === "Enter") sendMessage();
+        });
+
+        
+        document.getElementById("darkModeToggle").addEventListener("click", (e) => {
+            e.preventDefault();
+            const isDark = document.body.classList.toggle("dark-mode");
+            localStorage.setItem("loveSiteDarkMode", isDark ? "true" : "false");
         });
     </script>
 
