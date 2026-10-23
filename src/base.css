@@ -1,0 +1,40 @@
+        /* ===== base (replaces the old pink theme; only what is still used) ===== */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        button, input { font-family: inherit; }
+        a { text-decoration: none; }
+
+        @keyframes cardIn {
+            from { transform: scale(.85) translateY(20px); opacity: 0; }
+            to { transform: scale(1) translateY(0); opacity: 1; }
+        }
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            14% { transform: scale(1.15); }
+            28% { transform: scale(1); }
+            42% { transform: scale(1.1); }
+            56% { transform: scale(1); }
+        }
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            20% { transform: translateX(-8px); }
+            40% { transform: translateX(8px); }
+            60% { transform: translateX(-6px); }
+            80% { transform: translateX(6px); }
+        }
+        @keyframes float {
+            0% { transform: translateY(0) scale(1); opacity: 1; }
+            50% { transform: translateY(-400px) scale(1.2); opacity: .8; }
+            100% { transform: translateY(-800px) scale(1); opacity: 0; }
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        @keyframes shimmerBar { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+
+        .heart { position: fixed; bottom: -20px; color: red; animation: float 4s linear forwards; pointer-events: none; }
+
+        .site-header { display: flex; justify-content: space-between; align-items: center; width: 100%; }
+        .header-logo { display: flex; align-items: center; gap: 8px; font-weight: 700; }
+        .header-socials { display: flex; }
+        .header-socials a { font-size: 20px; transition: transform .3s, color .3s, background .3s; }
+        #darkModeToggle .fa-sun { display: none; }
+        body.dark-mode #darkModeToggle .fa-moon { display: none; }
+        body.dark-mode #darkModeToggle .fa-sun { display: inline-block; }

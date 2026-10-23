@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="ar">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#190b3b">
+    <link rel="manifest" href="manifest.webmanifest">
+    <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="هاجر 💖">
+
+    <title>I Love U MYANGEL💖</title>
+
+    <meta name="description" content=" I LOVE U MYANGEL ">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+    <meta property="og:title" content=" I Love U MYANGEL💖 " />
+    <meta property="og:description" content="I Love U MYANGEL💖 " />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="Heart Emoji.png" />
+    <meta property="og:url" content=" https://i-love-you-hager.pages.dev/ " />
+
+    <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png">
+    <link rel="icon" type="image/png" sizes="64x64" href="icons/favicon-64.png">
+
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    
+
+    <div id="celestial" aria-hidden="true"><span class="cel-body"></span></div>
+    <canvas id="sky" aria-hidden="true"></canvas>
+
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+        <defs>
+            <linearGradient id="hg" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="#ffb4d2" />
+                <stop offset=".5" stop-color="#ff5c98" />
+                <stop offset="1" stop-color="#c2338f" />
+            </linearGradient>
+            <symbol id="heart-sym" viewBox="0 0 32 29.6">
+                <path fill="url(#hg)"
+                    d="M23.6,0c-3.4,0-6.3,2.7-7.6,5.6C14.7,2.7,11.8,0,8.4,0C3.8,0,0,3.8,0,8.4c0,9.4,9.5,11.9,16,21.2c6.1-9.3,16-12.1,16-21.2C32,3.8,28.2,0,23.6,0z" />
+                <ellipse cx="9" cy="7" rx="3.4" ry="1.9" fill="#fff" opacity=".38" transform="rotate(-35 9 7)" />
+            </symbol>
+        </defs>
+    </svg>
+
+    <!-- ===== Entry gate: no private content lives in the page, it is sealed (AES-GCM) until the right dates are typed ===== -->
+    <div id="gate" role="dialog" aria-modal="true" aria-labelledby="gate-title">
+        <form id="gate-form" class="gate-card" autocomplete="off" novalidate>
+            <div class="heart-stage gate-heart" id="gate-heart-stage" aria-hidden="true">
+                <div class="heart-glow"></div>
+                <div class="heart-beat"><svg class="heart-svg" viewBox="0 0 32 29.6"><use href="#heart-sym" /></svg></div>
+            </div>
+            <h1 id="gate-title" class="gate-title">أهلاً يا هاجر 💖</h1>
+            <p class="gate-sub">قبل ما نفتح الحكاية.. اكتبي تاريخ ميلاد كل واحد مننا</p>
+            <p class="gate-sub jp" lang="ja" dir="ltr">私たち一人ひとりの生年月日を書いてください 💕</p>
+
+            <div class="gfield">
+                <label for="pw-in-1">My date of birth</label>
+                <div class="gwrap">
+                    <input id="pw-in-1" class="gate-input" type="password" placeholder="يوم / شهر / سنة" maxlength="20"
+                        autocomplete="off" dir="ltr" enterkeyhint="next" />
+                    <button type="button" class="ubtn eye" data-target="pw-in-1" aria-label="إظهار أو إخفاء التاريخ"><i
+                            class="fa-solid fa-eye"></i></button>
+                </div>
+            </div>
+            <div class="gfield">
+                <label for="pw-in-2">Your date of birth (Hager)</label>
+                <div class="gwrap">
+                    <input id="pw-in-2" class="gate-input" type="password" placeholder="يوم / شهر / سنة" maxlength="20"
+                        autocomplete="off" dir="ltr" enterkeyhint="go" />
+                    <button type="button" class="ubtn eye" data-target="pw-in-2" aria-label="إظهار أو إخفاء التاريخ"><i
+                            class="fa-solid fa-eye"></i></button>
+                </div>
+            </div>
+
+            <p id="gate-msg" class="gate-msg" role="status" aria-live="polite"></p>
+            <button type="submit" id="gate-submit" class="ubtn btn-main">افتحي الحكاية</button>
+            <p class="gate-foot">You are my soul, without you I would die</p>
+        </form>
+    </div>
+
+    <!-- ===== The app: scenes are empty shells, memories are rendered from the decrypted payload ===== -->
+    <div id="app" hidden>
+        <header class="site-header">
+            <a class="header-logo" href="#home" aria-label="الرئيسية">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart-fill"
+                    viewBox="0 0 16 16" aria-hidden="true">
+                    <path fill-rule="evenodd"
+                        d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314" />
+                </svg>ヘイガー
+            </a>
+            <div class="header-socials">
+                <a href="#" id="darkModeToggle" title="الوضع الليلي" aria-label="تبديل الوضع الليلي"><i
+                        class="fa-solid fa-moon"></i><i class="fa-solid fa-sun"></i></a>
+                <a href="#" id="openChatBtn" title="Chat" aria-label="الشات"><i class="fa-solid fa-comment-dots"></i></a>
+                <a href="https://github.com/BassemMohamed44/Velix-App/releases/download/v2.1.2/MYANGEL.exe" title="Love"
+                    aria-label="تحميل"><i class="fa-solid fa-infinity"></i></a>
+            </div>
+        </header>
+
+        <main>
+            <!-- HOME -->
+            <section class="scene" data-scene="home" aria-hidden="true" inert>
+                <div class="home">
+                    <button type="button" class="heart-stage home-heart" id="home-heart" aria-label="قلب هاجر، اضغطي عليه">
+                        <span class="heart-glow"></span>
+                        <span class="heart-beat"><svg class="heart-svg" viewBox="0 0 32 29.6" aria-hidden="true"><use href="#heart-sym" /></svg></span>
+                    </button>
+                    <h1 class="name-title" tabindex="-1" data-focus>هاجر</h1>
+                    <p class="name-sub" dir="ltr">ヘイガー · Hager</p>
+                    <p class="live-greet" id="live-greet" hidden></p>
+                    <p class="visit-line" id="visit-line"></p>
+                    <button type="button" class="ubtn gift-btn" id="gift-btn" hidden>
+                        <span class="gift-ic" aria-hidden="true">🎁</span>
+                        <span class="gift-txt"><span id="gift-label"></span><span id="gift-sub"></span></span>
+                    </button>
+                    <div class="mood-box" id="mood-box" hidden>
+                        <p class="mood-q" id="mood-q">إنتي حاسّة بإيه دلوقتي؟</p>
+                        <div class="mood-row" id="mood-row" role="group" aria-labelledby="mood-q"></div>
+                        <div class="mood-card" id="mood-card" hidden>
+                            <p class="mood-text" id="mood-text" role="status" aria-live="polite"></p>
+                            <div class="mood-actions">
+                                <button type="button" class="ubtn btn-soft" id="mood-more">رسالة تانية 🔄</button>
+                                <button type="button" class="ubtn btn-soft" id="mood-chat">ردّي في الشات 💬</button>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="home-tag">أو اختاري من فين نبدأ الحكاية</p>
+                    <div class="nav-grid">
+                        <button type="button" class="ubtn nav-card wide" data-go="world"><i class="fa-solid fa-earth-africa"></i>عالمنا 🪐<span class="badge-new" id="world-badge" hidden>كوكب جديد</span></button>
+                        <button type="button" class="ubtn nav-card wide" data-adventure id="adv-nav" hidden><i class="fa-solid fa-key"></i><span id="adv-nav-label">المغامرة السرية 🗝️</span><span class="badge-new" id="adv-badge" hidden></span></button>
+                        <button type="button" class="ubtn nav-card" data-go="story"><i class="fa-solid fa-book-open"></i>حكايتنا</button>
+                        <button type="button" class="ubtn nav-card" data-go="letter"><i class="fa-solid fa-envelope-open-text"></i>رسالة حب</button>
+                        <button type="button" class="ubtn nav-card" data-go="openwhen"><i class="fa-solid fa-heart"></i>افتحيني لما…</button>
+                        <button type="button" class="ubtn nav-card" data-go="stars"><i class="fa-solid fa-star"></i>سماء النجوم</button>
+                        <button type="button" class="ubtn nav-card wide" data-random><i class="fa-solid fa-dice"></i>رسالة عشوائية من القلب</button>
+                    </div>
+                    <div class="app-row" id="app-row" hidden>
+                        <button type="button" class="ubtn btn-soft" id="install-btn" hidden>📲 ثبّتي الموقع كتطبيق</button>
+                        <button type="button" class="ubtn btn-soft" id="notify-btn" hidden aria-pressed="false"></button>
+                        <p class="app-note" id="notify-note" hidden></p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- OUR STORY -->
+            <section class="scene" data-scene="story" aria-hidden="true" inert>
+                <div class="scene-inner">
+                    <div class="scene-head">
+                        <button type="button" class="ubtn back-btn" data-go="home" aria-label="رجوع"><i class="fa-solid fa-arrow-right"></i></button>
+                        <div>
+                            <h2 class="scene-title" tabindex="-1" data-focus>حكايتنا</h2>
+                            <p class="scene-sub">اضغطي على أي ذكرى عشان تتفتح</p>
+                        </div>
+                    </div>
+                    <ul class="timeline" id="timeline"></ul>
+                </div>
+            </section>
+
+            <!-- LOVE LETTER -->
+            <section class="scene" data-scene="letter" aria-hidden="true" inert>
+                <div class="scene-inner">
+                    <div class="scene-head">
+                        <button type="button" class="ubtn back-btn" data-go="home" aria-label="رجوع"><i class="fa-solid fa-arrow-right"></i></button>
+                        <div>
+                            <h2 class="scene-title" tabindex="-1" data-focus>رسالة حب</h2>
+                            <p class="scene-sub">في ظرف مستنيكي تفتحيه</p>
+                        </div>
+                    </div>
+                    <div class="env" id="env">
+                        <div class="env-body">
+                            <div class="env-letter" id="env-letter" aria-live="polite">
+                                <p id="letter-text"></p>
+                            </div>
+                            <div class="env-front"></div>
+                            <div class="env-flap"></div>
+                        </div>
+                    </div>
+                    <div class="env-actions">
+                        <button type="button" class="ubtn btn-main" id="env-btn">افتحي الرسالة 💌</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- OPEN WHEN -->
+            <section class="scene" data-scene="openwhen" aria-hidden="true" inert>
+                <div class="scene-inner">
+                    <div class="scene-head">
+                        <button type="button" class="ubtn back-btn" data-go="home" aria-label="رجوع"><i class="fa-solid fa-arrow-right"></i></button>
+                        <div>
+                            <h2 class="scene-title" tabindex="-1" data-focus>افتحيني لما…</h2>
+                            <p class="scene-sub">اختاري الحالة اللي إنتي فيها دلوقتي</p>
+                        </div>
+                    </div>
+                    <div class="ow-grid" id="ow-grid"></div>
+                </div>
+            </section>
+
+            <!-- STARS -->
+            <section class="scene" data-scene="stars" aria-hidden="true" inert>
+                <div class="scene-inner">
+                    <div class="scene-head">
+                        <button type="button" class="ubtn back-btn" data-go="home" aria-label="رجوع"><i class="fa-solid fa-arrow-right"></i></button>
+                        <div>
+                            <h2 class="scene-title" tabindex="-1" data-focus>سماء النجوم</h2>
+                            <p class="scene-sub">كل نجمة بتخبّي حاجة.. <span class="sky-count" id="sky-count"></span></p>
+                        </div>
+                    </div>
+                    <div class="sky-zone" id="sky-zone"></div>
+                </div>
+            </section>
+            <!-- WORLD -->
+            <section class="scene" data-scene="world" aria-hidden="true" inert>
+                <div class="scene-inner">
+                    <div class="scene-head">
+                        <button type="button" class="ubtn back-btn" data-go="home" aria-label="رجوع"><i class="fa-solid fa-arrow-right"></i></button>
+                        <div>
+                            <h2 class="scene-title" tabindex="-1" data-focus>عالمنا 🪐</h2>
+                            <p class="scene-sub">كل كوكب بيتفتح بحاجة بتعمليها <span class="sky-count" id="world-count"></span></p>
+                        </div>
+                    </div>
+                    <div class="world-map" id="world-map">
+                        <svg class="world-lines" id="world-lines" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"></svg>
+                    </div>
+                    <div class="world-actions">
+                        <button type="button" class="ubtn btn-soft" data-game>🃏 العبي لعبة الذاكرة</button>
+                        <button type="button" class="ubtn btn-soft" data-adventure id="adv-world-btn" hidden>🗝️ المغامرة السرية</button>
+                    </div>
+                    <h3 class="sec-title">إنجازاتنا 🏆 <small id="ach-count"></small></h3>
+                    <ul class="ach-list" id="ach-list"></ul>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- memory / message dialog -->
+    <div id="modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="m-title" aria-hidden="true" inert>
+        <div class="modal-card">
+            <button type="button" class="ubtn modal-close" id="m-close" aria-label="إغلاق"><i class="fa-solid fa-xmark"></i></button>
+            <div id="m-emoji" aria-hidden="true"></div>
+            <div id="m-meta"></div>
+            <h3 id="m-title"></h3>
+            <img id="m-img" alt="" hidden>
+            <p id="m-text"></p>
+            <div class="m-actions" id="m-actions"></div>
+        </div>
+    </div>
+
+    <div id="net-pill" class="net-pill" role="status" aria-live="polite" hidden>📴 مفيش إنترنت — الحكاية شغّالة، والشات محتاج إنترنت</div>
+
+    <div id="toast" class="toast" role="status" aria-live="polite">
+        <span class="toast-emoji" id="toast-emoji" aria-hidden="true"></span>
+        <span class="toast-txt"><span class="toast-title" id="toast-title"></span><span class="toast-text" id="toast-text"></span></span>
+        <button type="button" class="ubtn toast-go" id="toast-go" hidden tabindex="-1">شوفيه</button>
+        <button type="button" class="ubtn toast-x" id="toast-close" aria-label="إغلاق">✕</button>
+    </div>
+
+    <div id="game" class="modal" role="dialog" aria-modal="true" aria-labelledby="g-title" aria-hidden="true" inert>
+        <div class="modal-card game-card">
+            <button type="button" class="ubtn modal-close" id="g-close" aria-label="إغلاق اللعبة"><i class="fa-solid fa-xmark"></i></button>
+            <h3 id="g-title">لعبة الذاكرة 🃏</h3>
+            <p class="g-sub" id="g-sub">لاقي كل الأزواج المتشابهة عشان تفتحي المكان السري</p>
+            <div class="g-grid" id="g-grid" role="group" aria-label="كروت اللعبة"></div>
+            <div class="g-bar"><span id="g-moves">الحركات: 0</span><button type="button" class="ubtn btn-soft" id="g-restart">لعبة جديدة 🔄</button></div>
+            <p id="g-result" role="status" aria-live="polite"></p>
+            <div id="g-result-actions"></div>
+        </div>
+    </div>
+
+    <div id="adv" class="modal" role="dialog" aria-modal="true" aria-labelledby="adv-title" aria-hidden="true" inert>
+        <div class="modal-card adv-card">
+            <button type="button" class="ubtn modal-close" id="adv-close" aria-label="إغلاق المغامرة"><i class="fa-solid fa-xmark"></i></button>
+            <div id="adv-emoji" aria-hidden="true">🗝️</div>
+            <h3 id="adv-title"></h3>
+            <ol class="adv-steps" id="adv-steps" aria-label="مراحل المغامرة"></ol>
+            <p id="adv-intro" class="adv-intro"></p>
+            <div id="adv-puzzle" hidden>
+                <p id="adv-story" class="adv-story"></p>
+                <p id="adv-riddle" class="adv-riddle"></p>
+                <form id="adv-form" autocomplete="off" novalidate>
+                    <label for="adv-in" class="sr-only">إجابتك</label>
+                    <input id="adv-in" class="adv-input" type="text" maxlength="80" placeholder="اكتبي إجابتك هنا" autocomplete="off" enterkeyhint="go" />
+                    <button type="submit" class="ubtn btn-main" id="adv-submit">جاوبي</button>
+                </form>
+                <p id="adv-msg" role="status" aria-live="polite"></p>
+                <ul id="adv-hints" class="adv-hints"></ul>
+                <button type="button" class="ubtn btn-soft" id="adv-hint">💡 محتاجة تلميح؟</button>
+            </div>
+            <div id="adv-reward" hidden>
+                <h4 id="adv-r-title"></h4>
+                <img id="adv-r-img" alt="" hidden>
+                <p id="adv-r-text"></p>
+            </div>
+            <div id="adv-actions" class="m-actions"></div>
+        </div>
+    </div>
+
+    <audio id="loveSound" preload="none">
+        <source src="play.mp3" type="audio/mpeg">
+    </audio>
+
+    <div id="identity-overlay">
+        <div id="identity-card" class="chat-card visible" role="dialog" aria-modal="true" aria-label="تأكيد الهوية">
+            <div class="id-icon" aria-hidden="true">💌</div>
+            <p class="id-hint">ده تاريخ ميلادك إنت؟</p>
+            <div class="chat-name-options" id="identity-options"></div>
+        </div>
+    </div>
+
+    <div id="chat-overlay">
+        <div id="chat-blocked-screen" class="chat-card" role="dialog" aria-modal="true" aria-label="الشات مقفول">
+            <div class="id-icon" aria-hidden="true">🔒</div>
+            <p class="id-hint">لازم تدخل بالباسورد وتأكد هويتك الأول عشان تفتح الشات</p>
+        </div>
+
+        <section id="chat-window" class="chat-card" role="dialog" aria-modal="true" aria-labelledby="chat-title">
+            <div class="chat-header">
+                <div class="chat-title-wrap">
+                    <span class="chat-title" id="chat-title">الشات بينا 💕</span>
+                    <span class="chat-status connecting" id="chat-status">بيتصل…</span>
+                </div>
+                <div class="chat-header-actions">
+                    <button type="button" class="hbtn" id="randomBtn" title="رسالة عشوائية" aria-label="رسالة عشوائية">🎲</button>
+                    <button type="button" class="hbtn" id="backupNowBtn" title="نزّل نسخة" aria-label="تنزيل نسخة احتياطية">⬇</button>
+                    <button type="button" class="hbtn" id="openArchiveBtn" title="الشات القديم" aria-label="الشات القديم">🕘</button>
+                    <button type="button" class="hbtn" id="closeChatBtn" title="قفل" aria-label="إغلاق الشات">✕</button>
+                </div>
+            </div>
+            <div id="conn-banner" class="conn-banner" role="status" aria-live="polite">
+                <span id="conn-text"></span>
+                <button type="button" id="conn-retry" hidden>إعادة المحاولة</button>
+            </div>
+            <div class="chat-body">
+                <div id="chat-scroll" role="log" aria-label="رسايل الشات" tabindex="0">
+                    <div id="chat-older"></div>
+                    <div id="chat-skeleton" aria-hidden="true">
+                        <div class="sk them"></div><div class="sk me tall"></div><div class="sk them"></div>
+                        <div class="sk me"></div><div class="sk them tall"></div><div class="sk me"></div>
+                    </div>
+                    <div id="chat-messages"></div>
+                    <div id="chat-empty"><span class="big">💕</span>لسه مفيش رسايل.. ابدأوا بكلمة حلوة</div>
+                </div>
+                <button type="button" id="jump-latest">رسالة جديدة ⬇</button>
+            </div>
+            <div id="typing-indicator" aria-live="polite"></div>
+            <div id="reply-preview">
+                <span class="reply-preview-text" id="reply-preview-text"></span>
+                <button type="button" id="reply-preview-cancel" aria-label="إلغاء الرد">✕</button>
+            </div>
+            <div id="img-preview">
+                <img id="img-preview-thumb" alt="" hidden>
+                <span class="info" id="img-preview-info"></span>
+                <button type="button" class="rm" id="img-preview-remove" aria-label="إزالة الصورة">✕</button>
+            </div>
+            <div class="chat-input-row">
+                <button type="button" id="attachBtn" class="round-btn" title="إرسال صورة" aria-label="إرسال صورة">📷</button>
+                <button type="button" id="emojiToggleBtn" class="round-btn" aria-label="الإيموجي">😊</button>
+                <input id="chat-input" type="text" placeholder="اكتب حاجة حلوة..." autocomplete="off" maxlength="2000" enterkeyhint="send" />
+                <button type="button" id="chat-send" class="round-btn" aria-label="إرسال"><span style="display:inline-block;transform:scaleX(-1)">➤</span></button>
+            </div>
+            <input type="file" id="file-input" accept="image/*" hidden>
+            <div id="emoji-picker"></div>
+        </section>
+
+        <section id="archive-window" class="chat-card" role="dialog" aria-modal="true" aria-label="الشات القديم">
+            <div class="chat-header">
+                <div class="chat-title-wrap"><span class="chat-title">الشات القديم 📜</span></div>
+                <div class="chat-header-actions">
+                    <button type="button" class="hbtn" id="closeArchiveBtn" title="رجوع" aria-label="رجوع">✕</button>
+                </div>
+            </div>
+            <div class="archive-add-row">
+                <input id="archive-url-input" type="text" placeholder="الصق رابط ملف النسخة هنا..." autocomplete="off" />
+                <button type="button" id="archive-url-add" aria-label="إضافة">+</button>
+            </div>
+            <div id="archive-list"></div>
+        </section>
+
+        <section id="archive-detail-window" class="chat-card" role="dialog" aria-modal="true" aria-label="نسخة قديمة">
+            <div class="chat-header">
+                <div class="chat-title-wrap"><span class="chat-title" id="archive-detail-title">نسخة قديمة</span></div>
+                <div class="chat-header-actions">
+                    <button type="button" class="hbtn" id="backToArchiveListBtn" title="رجوع للقائمة" aria-label="رجوع للقائمة">➜</button>
+                </div>
+            </div>
+            <div id="archive-detail-messages"></div>
+        </section>
+    </div>
+
+    <div id="lightbox" role="dialog" aria-modal="true" aria-label="عرض الصورة">
+        <div class="lb-msg" id="lb-msg"></div>
+        <img id="lb-img" alt="الصورة المرسلة" hidden>
+        <div class="lb-bar">
+            <a id="lb-download" hidden download="hager-chat.jpg">تنزيل</a>
+            <button type="button" id="lb-retry" hidden>إعادة المحاولة</button>
+            <button type="button" id="lb-close">إغلاق</button>
+        </div>
+    </div>
+
+
+    <script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-database-compat.js"></script>
+    
+    
+    
+
+</body>
+
+</html>
+    <script src="script.js"></script>
+</body>

@@ -1,0 +1,162 @@
+
+        /* =====================================================================
+           LIVE SCENE (sky follows the time of day + mood) and SECRET ADVENTURE
+           Night is the base look. html[data-tod] = dawn | morning | afternoon | evening | night
+           html[data-mood] = calm | playful | warm | cheer (only changes the two glows).
+           ===================================================================== */
+        @property --sk1 { syntax: '<color>'; inherits: true; initial-value: rgba(150, 80, 220, .55); }
+        @property --sk2 { syntax: '<color>'; inherits: true; initial-value: rgba(255, 80, 160, .32); }
+        @property --sk3 { syntax: '<color>'; inherits: true; initial-value: #2c1257; }
+        @property --sk4 { syntax: '<color>'; inherits: true; initial-value: #190b3b; }
+        @property --sk5 { syntax: '<color>'; inherits: true; initial-value: #0b0620; }
+
+        html {
+            --sk1: rgba(150, 80, 220, .55); --sk2: rgba(255, 80, 160, .32);
+            --sk3: #2c1257; --sk4: #190b3b; --sk5: #0b0620;
+            --cx: 78%; --cy: 14%; --cs: 74px; --cc1: #fffdf2; --cc2: #cfc8ff; --cg: rgba(205, 195, 255, .45); --co: .95;
+            transition: --sk1 2.5s ease, --sk2 2.5s ease, --sk3 2.5s ease, --sk4 2.5s ease, --sk5 2.5s ease;
+        }
+        html[data-tod="dawn"] {
+            --sk1: rgba(255, 150, 120, .5); --sk2: rgba(255, 120, 190, .36);
+            --sk3: #5a2d7a; --sk4: #34194f; --sk5: #170a30;
+            --cx: 80%; --cy: 68%; --cs: 84px; --cc1: #fff1d6; --cc2: #ffb48a; --cg: rgba(255, 170, 120, .55); --co: .9;
+        }
+        html[data-tod="morning"] {
+            --sk1: rgba(255, 190, 140, .45); --sk2: rgba(120, 190, 255, .38);
+            --sk3: #4a4aa0; --sk4: #2e2a78; --sk5: #1b1650;
+            --cx: 72%; --cy: 22%; --cs: 82px; --cc1: #fffbe0; --cc2: #ffd36a; --cg: rgba(255, 215, 120, .6); --co: .95;
+        }
+        html[data-tod="afternoon"] {
+            --sk1: rgba(255, 210, 150, .4); --sk2: rgba(110, 170, 255, .42);
+            --sk3: #3f56a8; --sk4: #2b3a86; --sk5: #1a2260;
+            --cx: 42%; --cy: 9%; --cs: 78px; --cc1: #ffffff; --cc2: #ffe28a; --cg: rgba(255, 235, 150, .6); --co: .95;
+        }
+        html[data-tod="evening"] {
+            --sk1: rgba(255, 130, 90, .55); --sk2: rgba(220, 70, 160, .42);
+            --sk3: #6a2a6e; --sk4: #3a1655; --sk5: #1a0838;
+            --cx: 22%; --cy: 62%; --cs: 108px; --cc1: #ffe0b0; --cc2: #ff7a4a; --cg: rgba(255, 110, 70, .6); --co: .92;
+        }
+        html[data-mood="calm"]    { --sk1: rgba(80, 150, 220, .5);  --sk2: rgba(60, 200, 190, .28); }
+        html[data-mood="playful"] { --sk1: rgba(255, 200, 80, .5);  --sk2: rgba(255, 90, 170, .45); }
+        html[data-mood="warm"]    { --sk1: rgba(255, 100, 130, .55); --sk2: rgba(255, 150, 100, .4); }
+        html[data-mood="cheer"]   { --sk1: rgba(255, 215, 100, .5); --sk2: rgba(140, 220, 160, .3); }
+
+        body::before {
+            background:
+                radial-gradient(70% 55% at 18% 12%, var(--sk1), transparent 70%),
+                radial-gradient(60% 50% at 88% 78%, var(--sk2), transparent 72%),
+                radial-gradient(90% 80% at 50% 45%, var(--sk3) 0%, var(--sk4) 55%, var(--sk5) 100%);
+        }
+
+        /* the sun / moon */
+        #celestial {
+            position: fixed; z-index: -2; pointer-events: none;
+            left: var(--cx); top: var(--cy);
+            width: var(--cs); height: var(--cs);
+            margin: calc(var(--cs) / -2) 0 0 calc(var(--cs) / -2);
+            transition: left 3s ease, top 3s ease, width 3s ease, height 3s ease, margin 3s ease, opacity 1.5s ease;
+            opacity: var(--co);
+        }
+        .cel-body {
+            display: block; width: 100%; height: 100%; border-radius: 50%;
+            background:
+                radial-gradient(circle at 34% 30%, rgba(255, 255, 255, .55), transparent 38%),
+                radial-gradient(circle at 70% 70%, rgba(0, 0, 0, .12), transparent 45%),
+                radial-gradient(circle at 50% 50%, var(--cc1), var(--cc2) 72%);
+            box-shadow: 0 0 calc(var(--cs) * .5) var(--cg), 0 0 calc(var(--cs) * 1.4) var(--cg);
+            animation: celGlow 7s ease-in-out infinite alternate;
+        }
+        html[data-tod="night"] .cel-body {
+            background:
+                radial-gradient(circle at 30% 34%, rgba(150, 140, 200, .35) 0 9%, transparent 10%),
+                radial-gradient(circle at 62% 58%, rgba(150, 140, 200, .3) 0 13%, transparent 14%),
+                radial-gradient(circle at 46% 78%, rgba(150, 140, 200, .28) 0 6%, transparent 7%),
+                radial-gradient(circle at 36% 30%, var(--cc1), var(--cc2) 85%);
+        }
+        @keyframes celGlow { to { filter: brightness(1.12); transform: scale(1.04); } }
+
+        /* ---------- home: greeting + mood ---------- */
+        .live-greet { max-width: 440px; font-size: 18px; line-height: 1.9; font-weight: 600; color: var(--ink); margin-top: -2px; }
+        .live-greet[hidden], .mood-box[hidden], .mood-card[hidden] { display: none; }
+        .mood-box { width: min(460px, 100%); display: flex; flex-direction: column; align-items: center; gap: 8px; margin-top: 4px; }
+        .mood-q { font-size: 16px; color: var(--ink-soft); }
+        .mood-row { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
+        .mood-chip {
+            display: inline-flex; align-items: center; gap: 6px; min-height: 44px; padding: 8px 14px;
+            border-radius: 999px; font-size: 15px; font-weight: 700; color: #fff;
+            background: rgba(255, 255, 255, .1); border: 1.5px solid var(--line);
+            transition: background .2s, transform .2s, border-color .2s;
+        }
+        .mood-chip:hover { background: rgba(255, 255, 255, .18); transform: translateY(-2px); }
+        .mood-chip[aria-pressed="true"] { background: linear-gradient(135deg, rgba(255, 92, 152, .85), rgba(140, 70, 220, .85)); border-color: rgba(255, 255, 255, .5); }
+        .mood-card { width: 100%; padding: 16px 16px 14px; border-radius: 20px; background: var(--panel); border: 1.5px solid var(--line); animation: moodIn .45s ease both; }
+        .mood-text { font-size: 18px; line-height: 2; color: var(--ink); white-space: pre-line; }
+        .mood-actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-top: 10px; }
+        .mood-actions .btn-soft { min-height: 44px; padding: 8px 14px; font-size: 15px; }
+        @keyframes moodIn { from { opacity: 0; transform: translateY(8px); } }
+
+        /* ---------- secret adventure ---------- */
+        .adv-card { width: min(470px, 100%); }
+        #adv-emoji { font-size: 44px; line-height: 1.2; }
+        #adv-title { font-size: 24px; font-weight: 800; color: #fff; margin: 4px 0 10px; }
+        .adv-steps { list-style: none; margin: 0 0 14px; padding: 0; display: flex; justify-content: center; flex-wrap: wrap; gap: 8px; }
+        .adv-dot {
+            width: 44px; height: 44px; display: grid; place-items: center; border-radius: 50%;
+            font-size: 18px; font-weight: 800; color: #fff;
+            background: rgba(255, 255, 255, .08); border: 1.5px solid var(--line);
+        }
+        .adv-dot.done { background: rgba(255, 150, 200, .3); border-color: rgba(255, 190, 220, .7); }
+        .adv-dot.now { background: linear-gradient(135deg, rgba(255, 92, 152, .9), rgba(140, 70, 220, .9)); border-color: #fff; box-shadow: 0 0 18px rgba(255, 110, 180, .6); }
+        .adv-dot.locked { opacity: .45; cursor: default; }
+        .adv-dot.view { outline: 2.5px solid #ffe08a; outline-offset: 2px; }
+        .adv-intro, .adv-story { font-size: 17px; line-height: 2; color: var(--ink-soft); white-space: pre-line; }
+        .adv-intro:empty, .adv-story:empty { display: none; }
+        .adv-riddle { font-size: 21px; line-height: 1.9; font-weight: 800; color: #fff; margin: 10px 0 14px; white-space: pre-line; }
+        #adv-form { display: flex; gap: 8px; align-items: stretch; }
+        #adv-form[hidden], #adv-hint[hidden], #live-greet[hidden] { display: none; }
+        .adv-input {
+            flex: 1; min-width: 0; min-height: 50px; padding: 8px 14px; border-radius: 14px;
+            font: inherit; font-size: 18px; color: #fff; text-align: center;
+            background: rgba(255, 255, 255, .1); border: 1.5px solid var(--line); outline: none;
+        }
+        .adv-input:focus { border-color: #ffb3d1; box-shadow: 0 0 0 3px rgba(255, 150, 200, .3); }
+        .adv-input::placeholder { color: rgba(255, 255, 255, .5); }
+        .adv-input.shake { animation: advShake .4s; }
+        @keyframes advShake { 20%, 60% { transform: translateX(-7px); } 40%, 80% { transform: translateX(7px); } }
+        #adv-form .btn-main { min-height: 50px; padding: 0 20px; }
+        #adv-msg { min-height: 30px; margin-top: 8px; font-size: 16px; font-weight: 700; color: #ffd3a8; }
+        #adv-msg.good { color: #b8ffcf; }
+        .adv-hints { list-style: none; margin: 4px 0 10px; padding: 0; display: flex; flex-direction: column; gap: 6px; text-align: right; }
+        .adv-hints:empty { display: none; }
+        .adv-hints li { padding: 8px 12px; border-radius: 12px; background: rgba(255, 224, 138, .12); border: 1px solid rgba(255, 224, 138, .35); font-size: 16px; line-height: 1.7; }
+        #adv-hint.nudge { animation: giftPulse 1.8s ease-in-out infinite; border-color: #ffe08a; }
+        #adv-hint[disabled] { opacity: .55; cursor: default; }
+        #adv-reward { margin-top: 6px; padding: 16px; border-radius: 20px; background: rgba(255, 255, 255, .07); border: 1.5px solid var(--line); animation: moodIn .5s ease both; }
+        #adv-reward[hidden], #adv-puzzle[hidden] { display: none; }
+        #adv-r-title { font-size: 20px; font-weight: 800; color: #ffe08a; margin: 0 0 8px; }
+        #adv-r-img { display: block; max-width: 100%; max-height: 44dvh; margin: 6px auto 10px; border-radius: 16px; }
+        #adv-r-img[hidden] { display: none; }
+        #adv-r-text { font-size: 18px; line-height: 2; color: var(--ink); white-space: pre-line; }
+        #adv-actions:empty { display: none; }
+
+        .world-actions { flex-wrap: wrap; gap: 10px; }
+
+        @media (prefers-reduced-motion: reduce) {
+            html { transition: none; }
+            #celestial { transition: none; }
+            .cel-body, .mood-card, #adv-reward, #adv-hint.nudge { animation: none !important; }
+        }
+
+        /* ---------- app mode: install / alerts / offline ---------- */
+        .app-row { display: flex; flex-direction: column; align-items: center; gap: 8px; width: min(460px, 100%); margin-top: 6px; }
+        .app-row[hidden], .app-row [hidden] { display: none; }
+        .app-row .btn-soft { min-height: 46px; width: 100%; font-size: 15px; }
+        .app-row .btn-soft[disabled] { opacity: .55; cursor: default; }
+        .app-note { font-size: 13px; color: var(--ink-soft); opacity: .85; line-height: 1.7; }
+        .net-pill {
+            position: fixed; z-index: 10002; left: 50%; bottom: 14px; transform: translateX(-50%);
+            max-width: calc(100% - 24px); padding: 9px 16px; border-radius: 999px; text-align: center;
+            font-size: 14px; font-weight: 700; color: #fff; background: rgba(60, 20, 90, .95);
+            border: 1.5px solid rgba(255, 190, 220, .6); box-shadow: 0 8px 26px rgba(0, 0, 0, .45);
+        }
+        .net-pill[hidden] { display: none; }

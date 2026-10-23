@@ -1,0 +1,17 @@
+{
+  "_note": "اقتراح غير مُطبَّق. لازم تراجعيه في Rules Playground قبل النشر، وانتبهي إنه بيحافظ على الوصول المفتوح الحالي (read/write = true) وبيضيف بس قيود على شكل وحجم الرسايل والصور. لو تطبيق Flutter بيكتب حقول تانية ممكن تحتاجي تعدّلي الشروط.",
+  "rules": {
+    ".read": true,
+    ".write": true,
+    "messages": {
+      "$id": {
+        ".validate": "newData.hasChildren(['sender','text']) && newData.child('sender').isString() && newData.child('text').isString() && newData.child('text').val().length <= 2000 && (!newData.hasChild('thumb') || (newData.child('thumb').isString() && newData.child('thumb').val().length < 90000 && newData.child('thumb').val().matches(/^data:image\\/jpeg;base64,.*/)))"
+      }
+    },
+    "chatImages": {
+      "$id": {
+        ".validate": "newData.hasChild('data') && newData.child('data').isString() && newData.child('data').val().length < 700000 && newData.child('data').val().matches(/^data:image\\/jpeg;base64,.*/)"
+      }
+    }
+  }
+}
